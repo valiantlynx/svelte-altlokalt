@@ -13,7 +13,7 @@
 </script>
 
 <div class="flex flex-wrap justify-center">
-	{#each entities._embedded.enheter as entity (entity.id)}
+	{#each entities._embedded.enheter as entity (entity.organisasjonsnummer)}
 		<EntityCards entity={entity} />
 	{/each}
 </div>

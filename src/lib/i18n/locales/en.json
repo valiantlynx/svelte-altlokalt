@@ -36,7 +36,21 @@
 	  },
 	  "home": {
 		"title": "Homepage",
-		"description": "Discover Norwegian companies and innovations."
+		"description": "Discover Norwegian companies and innovations.",
+		"features": [
+			{
+			  "title": "Explore Companies",
+			  "summary": "Discover and explore details about Norwegian companies.",
+			  "image": "https://picsum.photos/800/450?business",
+			  "alt": "Image of a company"
+			},
+			{
+			  "title": "Company Data",
+			  "summary": "Get detailed information on each company.",
+			  "image": "https://picsum.photos/800/450?data",
+			  "alt": "Image of company data"
+			}
+		  ]
 	  },
 	  "enheter": {
 		"title": "Company Details",

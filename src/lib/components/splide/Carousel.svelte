@@ -3,16 +3,10 @@
   import { onMount } from "svelte";
   import "@splidejs/svelte-splide/css";
   import "./splide-override.css";
-  import { page } from "$app/stores";
+  import { _ } from 'svelte-i18n';
 
-  const blogs = $page.data.blogs;
-
-  // set up placeholder images
-  let images = [];
-  const url = "https://picsum.photos/800/450?random=";
-  for (let i = 1; i <= 10; i++) {
-    images.push(url + i);
-  }
+// Assuming features data is fetched from the localized JSON files
+let features = $_('page.home.features');
 
   // set up carousel config
   const mainOptions = {
@@ -45,42 +39,35 @@
 
 <div class="gallery">
   <div class="gallery--main">
-    <Splide 
-      bind:this={main} 
-      options={ mainOptions }
-    >
-      {#each blogs.items as blog}
-        <SplideSlide>
-          <a 
-          href={`/${blog.slug}`}
+    <Splide bind:this={main} options={mainOptions}>
+      {#each features as feature}
+      <SplideSlide>
+        <a 
+          href={`/enheter`}
           class="hover:cursor-pointer hover:underline hover:text-secondary"
           >
-          <div class="blog-hero">
-            <img src={blog?.image} alt={blog?.alt} />
+          <div class="feature-hero">
+            <img src={feature.image} alt={feature.alt} />
             <div class=" absolute p-10 bg-secondary text-secondary-content bg-opacity-75 bottom-5 left-5 right-5 rounded-md">
               <h2 class="text-2xl font-bold text-secondary-content">
-              {blog.title}</h2>
+              {feature.title}</h2>
               <p class="text-base font-normal text-secondary-content my-4">
-                {blog.summary}</p>
-              <p class="btn btn-primary">Read More</p>
+                {feature.summary}</p>
+              <p class="btn btn-primary">{$_('common.readMore')}</p>
             </div>
           </div>
         </a>
-        </SplideSlide>
+      </SplideSlide>
       {/each}
     </Splide>
   </div>
 
   <div class="gallery--thumbs">
-    <Splide 
-      id="gallery--thumbs"
-      bind:this={thumbs} 
-      options={ thumbsOptions }
-    >
-      {#each blogs.items as blog}
-        <SplideSlide>
-          <img src={blog?.image} alt={blog?.alt}/>
-        </SplideSlide>
+    <Splide id="gallery--thumbs" bind:this={thumbs} options={thumbsOptions}>
+      {#each features as feature}
+      <SplideSlide>
+        <img src={feature.image} alt={feature.alt} />
+      </SplideSlide>
       {/each}
     </Splide>
   </div>
@@ -97,11 +84,11 @@
     min-height: 200px;
   }
 
-  .blog-hero {
+  .feature-hero {
     position: relative;
   }
 
-  .blog-hero img {
+  .feature-hero img {
     width: 100%;
     height: 520px; /* Set an appropriate height for your hero images */
     object-fit: cover;

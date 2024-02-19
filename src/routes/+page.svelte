@@ -53,17 +53,8 @@
   }
 </script>
 
-<!-- <Carousel /> -->
+<Carousel />
 <BlogGrid />
-<button
-class="transition cursor-pointer xl:mb-5 mr-5 xl:mr-0"
-on:click={requestNotificationPermission}
->
-<img src="/images/subscriptions.webp" alt="notify me" class="w-10 h-10" />
-</button>
-<Chat />
-
-
 
 <svelte:head>
 	<title>{$page.data.siteName}</title>
