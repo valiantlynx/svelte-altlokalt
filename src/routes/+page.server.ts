@@ -6,6 +6,7 @@ export const load = async () => {
     const apiUrl = 'https://data.brreg.no/enhetsregisteret/api/enheter';
     const response = await axios.get(apiUrl, {
       params: {
+        page: 20,
         size: 10
       }
     });
