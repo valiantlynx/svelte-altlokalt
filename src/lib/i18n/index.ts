@@ -6,6 +6,7 @@ const defaultLocale = 'nb';
 
 register('en', () => import('./locales/en.json'));
 register('nb', () => import('./locales/nb.json'));
+register('no', () => import('./locales/nb.json'));
 register('nn', () => import('./locales/nn.json'));
 
 init({

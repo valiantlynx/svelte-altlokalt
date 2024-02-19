@@ -57,6 +57,11 @@
 		"title": "{companyName} | Company Details",
 		"description": "Detailed view of {companyName}, a Norwegian company.",
 		"notFound": "Company not found."
+	  },
+	  "entitiesListing": {
+		"title": "Entities Listing",
+		"description": "Browse through our comprehensive listing of entities. Discover businesses, organizations, and more.",
+		"keywords": "entities, businesses, organizations, Norway"
 	  }
 	}
   }

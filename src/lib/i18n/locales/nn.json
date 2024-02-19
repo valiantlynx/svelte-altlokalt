@@ -57,6 +57,11 @@
 			"title": "{companyName} | Selskapsdetaljar",
 			"description": "Detaljert visning av {companyName}, eit norsk selskap.",
 			"notFound": "Selskapet blei ikkje funne."
-		}
+		},
+		"entitiesListing": {
+			"title": "Oversyn over Einingar",
+			"description": "Bla gjennom vår omfattande liste over einingar. Oppdag bedrifter, organisasjonar og meir.",
+			"keywords": "einingar, bedrifter, organisasjonar, Noreg"
+		  }
 	}
 }

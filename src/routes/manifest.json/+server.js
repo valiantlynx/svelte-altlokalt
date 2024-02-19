@@ -91,7 +91,7 @@ export async function GET({ url }) {
 			}
 		],
 		dir: 'auto',
-		lang: 'en-US',
+		lang: 'no',
 		categories: [
 			'books',
 			'business',
