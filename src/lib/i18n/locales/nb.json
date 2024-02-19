@@ -1,0 +1,124 @@
+{
+	"page": {
+		"lang": {
+			"english": "Engelsk",
+			"norwegian": "Norsk"
+		},
+		"home": {
+			"title": "Homepage",
+			"nav": "Home"
+		},
+		"food": {
+			"recipe": {
+				"title": "Oppskrift Kalkulatoren",
+				"description": "Minfuel overvåker prisene på norske dagligvarer og bygger smarte løsninger som forenkler handleturen din.",
+				"sub-title": "Finn hva en Oppskrift koster?",
+				"sub-description": "Minfuel overvåker prisene på norske dagligvarer og bygger smarte løsninger som forenkler handleturen din."
+			},
+			"product": {
+				"title": "Prissammenligning av Dagligvarer",
+				"description": "Minfuel overvåker prisene på norske dagligvarer og bygger smarte løsninger som forenkler handleturen din."
+			},
+
+			"title": "Prissammenligning av Dagligvarer",
+			"description": "Minfuel overvåker prisene på norske dagligvarer og bygger smarte løsninger som forenkler handleturen din."
+		},
+		"about": {
+			"title": "About",
+			"nav": "About"
+		},
+		"contact": {
+			"title": "Contact",
+			"nav": "Contact Us"
+		},
+		"blog": {
+			"title": "Blogg innlegg",
+			"cta": "Les alt om Energi. Drivstoff, elektrisitet, mat, selskaper og mer. Enten du ser etter tips og triks, eller bare vil lære om de siste trendene, har vi dekket deg"
+		},
+		"chat": {
+			"title": "Bli med samtalen",
+			"cta": "Bli med samtalen",
+			"send": "Send",
+			"sent": "Sendt",
+			"delivered": "Levert",
+			"usage_guide": "Skriv inn en melding...",
+			"login_guide": "<------- Logg inn for å chatte 💬",
+			"login": "Logg Inn"
+		},
+		"search": {
+			"title": "Bli med samtalen",
+			"no_results": "No search results",
+			"send": "Send",
+			"sent": "Sendt",
+			"delivered": "Levert",
+			"usage_guide": "Skriv inn en melding...",
+			"login_guide": "Logg inn for å chatte... ------>",
+			"login": "Logg Inn"
+		},
+		"load": {
+			"title": "Bli med samtalen",
+			"retrieving": "Henter data...",
+			"send": "Send",
+			"sent": "Sendt",
+			"delivered": "Levert",
+			"usage_guide": "Skriv inn en melding...",
+			"login_guide": "Logg inn for å chatte... ------>",
+			"login": "Logg Inn"
+		},
+		"login": {
+			"title": "Logg inn | Minfuel",
+			"arleady_logged": "You are already logged in",
+			"back": "Go back",
+			"username": "Username",
+			"password": "Password",
+			"incorrect": "password or username incorrect",
+			"r_u_sign_up": "are you sure your registered?",
+			"signup": "Not registered? Signup",
+			"forgot": "Glemt passordet?",
+			"login": "Logg Inn"
+		},
+		"notify": {
+			"title": "Drivstoff Prisvarsling | Minfuel",
+			"headline": "Lag et varsel om drivstoffpris ",
+			"description": "Vil du bli varslet hvis drivstoffprisen på en bensinstasjon i byen din er under ønsket verdi?",
+			"cta": "Kom i gang her",
+			"fuel_types": "Drivstoff type",
+			"lowest": "Hva er den laveste prisen vi bør gi deg beskjed om?",
+			"optional": "Valgfri",
+			"or": "eller",
+			"city": "Hvilken by/sted skal vi sammenligne alle bensinstasjonene for deg?",
+			"where": "Hvor skal vi varsle deg?",
+			"email": "via epost",
+			"number": "på tekstmelding",
+			"comments": "noen kommentarer",
+			"send": "Lagre endringer",
+			"success": "Vellykket",
+			"ads": "Klikk på et annonse for å aktivere varslingene",
+			"confirm": "Confrim",
+			"back": "back"
+		},
+		"footer": {
+			"about_us": "Om oss",
+			"sale": "Salgsvilkår",
+			"description": "Vil du bli varslet hvis drivstoffprisen på en bensinstasjon i byen din er under ønsket verdi?",
+			"contact": "Contact",
+			"privacy": "Privacy",
+			"terms": "Terms and Conditions",
+			"copyright": "Copyright © 2023 - All right reserved by",
+			"pricing": "Pricing"
+		},
+		"ui": {
+			"banner": {
+				"warning": {
+					"title": "Bli med samtalen",
+					"notSet": "GUIDE",
+					"setup": "Du trenger ikke logge inn, men det er gratis"
+				}
+			},
+			"modal": {
+				"warning": "Bli med samtalen"
+			},
+			"description": "Vil du bli varslet hvis drivstoffprisen på en bensinstasjon i byen din er under ønsket verdi?"
+		}
+	}
+}

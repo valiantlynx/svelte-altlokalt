@@ -6,6 +6,13 @@
 	import '../app.postcss';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	//locale
+	import { browser } from '$app/environment';
+	import '$lib/i18n'; // Import to initialize. Important :)
+	import { locale } from 'svelte-i18n';
+	if (browser) {
+		locale.set(window.navigator.language);
+	}
 
 	async function detectServiceWorkerUpdate() {
 		const registration = await navigator.serviceWorker.ready;

@@ -3,82 +3,71 @@
 
     const company = $page.data.companyData;
 </script>
-  
-  <div class="container mx-auto px-4 py-8">
-	<div class="card bg-base-100 shadow-xl">
-	  <div class="card-body">
-		<h2 class="card-title text-3xl">{company.navn}</h2>
-		<p class="text-xl">{company.organisasjonsform.beskrivelse} ({company.organisasjonsform.kode})</p>
-  
-		<div class="divider"></div> <!-- Stylish divider -->
-  
-		<!-- Company Details -->
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-		  <div>
-			<h3 class="text-lg font-bold">General Information</h3>
-			<ul class="list-disc pl-5">
-			  <li>Organization Number: {company.organisasjonsnummer}</li>
-			  <li>Founded: {company.stiftelsesdato}</li>
-			  <li>Employees: {company.antallAnsatte}</li>
-			  <li>Business Type: {company.naeringskode1.beskrivelse}</li>
-			</ul>
-		  </div>
-		  <div>
-			<h3 class="text-lg font-bold">Registration Details</h3>
-			<ul class="list-disc pl-5">
-			  <li>Registered: {company.registreringsdatoEnhetsregisteret}</li>
-			  <li>Corporate Assembly: {company.registrertIForetaksregisteret ? 'Yes' : 'No'}</li>
-			  <li>Bankruptcy: {company.konkurs ? 'Yes' : 'No'}</li>
-			  <li>Under Liquidation: {company.underAvvikling ? 'Yes' : 'No'}</li>
-			</ul>
-		  </div>
-		</div>
-  
-		<div class="divider"></div>
-  
-		<!-- Address Section -->
-		<div>
-		  <h3 class="text-lg font-bold">Business Address</h3>
-		  <p>{company.forretningsadresse.adresse.join(", ")}</p>
-		  <p>{company.forretningsadresse.postnummer} {company.forretningsadresse.poststed}</p>
-		  <p>{company.forretningsadresse.land}</p>
-		</div>
-	  </div>
-	</div>
-  </div>
-  
 
-  <svelte:head>
+<div class="container mx-auto px-4 py-8">
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title text-3xl">{company.navn}</h2>
+            <p class="text-xl">{company.organisasjonsform.beskrivelse} ({company.organisasjonsform.kode})</p>
+
+            <div class="divider"></div>
+
+            <!-- Company Details -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <h3 class="text-lg font-bold">Generell informasjon</h3>
+                    <ul class="list-disc pl-5">
+                        <li>Organisasjonsnummer: {company.organisasjonsnummer}</li>
+                        <li>Stiftelsesdato: {company.stiftelsesdato}</li>
+                        <li>Antall ansatte: {company.antallAnsatte}</li>
+                        <li>Næringskode: {company.naeringskode1.beskrivelse}</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold">Registreringsdetaljer</h3>
+                    <ul class="list-disc pl-5">
+                        <li>Registrert i Enhetsregisteret: {company.registreringsdatoEnhetsregisteret}</li>
+                        <li>Registrert i Foretaksregisteret: {company.registrertIForetaksregisteret ? 'Ja' : 'Nei'}</li>
+                        <li>Konkurs: {company.konkurs ? 'Ja' : 'Nei'}</li>
+                        <li>Under avvikling: {company.underAvvikling ? 'Ja' : 'Nei'}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Address Section -->
+            <div>
+                <h3 class="text-lg font-bold">Forretningsadresse</h3>
+                <p>{company.forretningsadresse.adresse.join(", ")}</p>
+                <p>{company.forretningsadresse.postnummer} {company.forretningsadresse.poststed}</p>
+                <p>Norge</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<svelte:head>
     <title>{company.navn} | altlokalt</title>
     <!-- Canonical Link -->
     <link rel="canonical" href={`https://${$page.data.siteName}/enheter/${company.organisasjonsnummer}`} />
-	<meta name="author" content="{$page.data.siteName}" />
-    <!-- Description Meta Tag -->
-    <meta name="description" content={`Learn more about ${company.navn}, their services, and company details.`} />
-    <!-- Keywords Meta Tag -->
-    <meta name="keywords" content={`${company.navn}, ${company.organisasjonsform.beskrivelse}, Norwegian Company, ${company.naeringskode1.beskrivelse}`} />
+    <meta name="description" content={`Finn ut mer om ${company.navn}, deres tjenester og bedriftsdetaljer.`} />
+    <meta name="keywords" content={`${company.navn}, ${company.organisasjonsform.beskrivelse}, Norsk bedrift, ${company.naeringskode1.beskrivelse}`} />
 
-    <!-- Mobile Web App Meta Tags -->
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content={$page.data.siteName} />
-
-    <!-- Open Graph Meta Tags (for social media sharing) -->
+    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content={`${company.navn} | altlokalt`} />
-    <meta property="og:type" content="business.business" />
+    <meta property="og:description" content={`Finn ut mer om ${company.navn} og deres virksomhet i Norge.`} />
     <meta property="og:url" content={`https://${$page.data.siteName}/enheter/${company.organisasjonsnummer}`} />
-    <meta property="og:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`}/>
-    <meta property="og:description" content={`Learn more about ${company.navn} and their business operations in Norway.`} />
+    <meta property="og:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`} />
     <meta property="og:site_name" content={$page.data.siteName} />
 
     <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`} />
     <meta name="twitter:title" content={`${company.navn} | ${$page.data.siteName}`} />
-    <meta name="twitter:description" content={`Learn more about ${company.navn} and their business operations.`} />
-    <meta name="twitter:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`}/> <!-- Adjust as needed -->
+    <meta name="twitter:description" content={`Finn ut mer om ${company.navn} og deres virksomhet.`} />
+    <meta name="twitter:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`} />
 
-    <!-- Additional Meta Tags for SEO and Social Media -->
     <!-- Schema.org for Google -->
     <meta itemprop="name" content={`${company.navn} | ${$page.data.siteName}`} />
-    <meta itemprop="description" content={`Information about ${company.navn}, a ${company.organisasjonsform.beskrivelse} in Norway.`} />
-    <meta itemprop="image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`}/> <!-- Adjust as needed -->
+    <meta itemprop="description" content={`Informasjon om ${company.navn}, et ${company.organisasjonsform.beskrivelse} i Norge.`} />
+    <meta itemprop="image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`} />
 </svelte:head>

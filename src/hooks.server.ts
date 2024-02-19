@@ -2,9 +2,17 @@ import PocketBase from 'pocketbase';
 import { site } from '@valiantlynx/general-config';
 import { serializeNonPOJOs } from '$lib/utils/api';
 import { authStore } from '$lib/utils/stores';
+import { locale } from 'svelte-i18n';
 
 /** @type {import('@sveltejs/kit').Handle} */
 export const handle = async ({ event, resolve }) => {
+	//locale
+	const lang = event.request.headers.get('accept-language')?.split(',')[0];
+	if (lang) {
+		locale.set(lang);
+	}
+
+	//poscketbase
 	event.locals.pb = new PocketBase(site.site.pocketbase);
 	let storedAuth;
 	// subscribe to the auth store
