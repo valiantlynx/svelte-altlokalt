@@ -12,6 +12,14 @@
 		"blog": "Blog",
 		"companies": "Companies"
 	  },
+	  "chat": {
+		"anonymous": "Anonymous",
+		"description": "Join the Discussion",
+		"placeholder": "Type your message here...",
+		"send": "Comment sent",
+		"error": "Error sending comment",
+		"delivered": "comment delivered"
+	  },
 	  "norway": "Norway",
 	  "norwegianCompany": "Norwegian company",
 	  "additionalInfo": "Additional info",

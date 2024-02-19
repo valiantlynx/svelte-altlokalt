@@ -3,6 +3,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { page } from '$app/stores';
 	import { pb } from '$lib/utils/api';
+	import { _ } from 'svelte-i18n';
 
 	let newMessage = '';
 	/**
@@ -97,46 +98,30 @@
 	}
 </script>
 
-<div class=" p-4 space-y-4 items-center">
-	<div class=" p-4 space-y-4 border-dashed border-2 border-primary sm:mx-20">
-		<h2 class="text-2xl font-bold mb-4">Join the Discussion</h2>
+<div class="space-y-4 items-center py-8">
+	<div class="p-4 space-y-4 border-dashed border-2 border-primary">
+		<h2 class="text-2xl font-bold mb-4">{$_('common.chat.description')}</h2>
 	
 		<main class="overflow-y-auto" on:scroll={watchScroll}>
 			{#each messages as message (message.id)}
 				<ChatMessage {message} sender={$page.data.user?.username} />
 			{/each}
-			<div class="dummy" bind:this={scrollBottom} />
 		</main>
-	
-		{#if !canAutoScroll}
-			<div class="text-center justify-center flex">
-				<button on:click={autoScroll} class="btn btn-secondary">
-					{#if unreadMessages}
-						💬
-					{/if}
-					🡣
-				</button>
-			</div>
-		{/if}
-	
+
 		<div class="border-t border-primary pt-4">
 			<form on:submit|preventDefault={sendMessage} class="space-x-2 flex items-center">
+				{#if !$page.data.user}
+					<a href="/login" type="submit" class="btn btn-primary">{$_('common.login')}</a>
+				{/if}
 				<input
 					type="text"
-					placeholder={$page.data.user
-						? 'write your comment here'
-						: 'login to write a comment  ----------------->'}
+					placeholder={$_('common.chat.placeholder')}
 					minlength="1"
 					bind:value={newMessage}
 					class="input input-bordered input-primary flex-grow"
 				/>
-				{#if $page.data.user}
-					<button type="submit" class="btn btn-primary"> Send </button>
-				{:else}
-					<a href="/login" type="submit" class="btn btn-primary">Login</a>
-				{/if}
+				<button type="submit" class="btn btn-primary">{$_('common.send')}</button>
 			</form>
 		</div>
 	</div>
 </div>
-

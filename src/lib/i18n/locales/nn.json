@@ -12,6 +12,14 @@
 			"blog": "Blogg",
 			"companies": "Selskap"
 		},
+		"chat": {
+			"anonymous": "Anonym",
+			"description": "Bli med i diskusjonen",
+			"placeholder": "Skriv meldinga di her...",
+			"send": "Kommentar sendt",
+			"error": "Feil ved sending av kommentar",
+			"delivered": "kommentar levert"
+		  },		  
 		"norway": "Noreg",
 		"norwegianCompany": "Norsk bedrift",
 		"additionalInfo": "Extra info",
