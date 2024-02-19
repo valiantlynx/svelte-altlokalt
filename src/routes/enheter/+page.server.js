@@ -9,7 +9,7 @@ export const load = async () => {
     // Use Axios to get data from the API
     const response = await axios.get(apiUrl, {
       params: {
-        size: 10
+        size: 50
       }
     });
 
