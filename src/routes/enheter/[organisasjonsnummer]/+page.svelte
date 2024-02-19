@@ -123,6 +123,7 @@
   
 	<Chat />
 </div>
+
 <svelte:head>
     <title>{company.navn} | {$page.siteName}</title>
     <link rel="canonical" href={`https://${$page.url.origin}/enheter/${company.organisasjonsnummer}`} />

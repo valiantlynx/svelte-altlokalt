@@ -3,10 +3,7 @@ import { error } from '@sveltejs/kit';
 
 export const load = async () => {
   try {
-    // Define the URL for the Enhetsregisteret API
     const apiUrl = 'https://data.brreg.no/enhetsregisteret/api/enheter';
-    
-    // Use Axios to get data from the API
     const response = await axios.get(apiUrl, {
       params: {
         size: 50
@@ -15,7 +12,7 @@ export const load = async () => {
 
     const entities = response.data;
     return {
-		entities
+		  entities
     };
   } catch (e) {
     console.error('Error: ', e);
