@@ -1,221 +1,88 @@
 <script>
   	import LikeButton from '$lib/components/blog/LikeButton.svelte';
     import { page } from '$app/stores';
-    import { ValiantRichText, getData } from '@valiantlynx/svelte-rich-text';
-    import { pb } from '$lib/utils/api';
-    import toast from 'svelte-french-toast';
-    import Chat from '$lib/components/Chat.svelte';
-	import Share from '$lib/components/share/Share.svelte';
 
-    const blog = $page.data.blog;
-
-    const saveData = (data) => {
-        try {
-            console.log(data);
-            const datapb = {
-                "content_object": data
-            };
-            pb.collection('blogs').update(blog.id, datapb);
-            toast.success('Blog post updated successfully');
-        } catch (error) {
-            console.log(error);
-            toast.error('Something went wrong please try again');
-        }
-    };
+    const company = $page.data.companyData;
 </script>
-
-<!-- Blog Container -->
-<div class="container mx-auto px-4 md:px-8 lg:px-12 py-4 md:py-8 lg:py-12">
-<!-- Blog Header -->
-<div class="mb-8">
-    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">{blog?.title}</h1>
-    
-    <div class="flex items-center gap-4 mb-4">
-        <!-- Author Avatar -->
-        <div class="shrink-0">
-            <img src={blog.expand?.author.avatar ? `https://animevariant.fly.dev/api/files/${blog.expand?.author?.collectionId}/${blog.expand?.author?.id}/${blog.expand?.author?.avatar}`: 'https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=' + blog.expand?.author?.username} alt={"Author" + blog.expand?.author?.username} class="w-12 h-12 rounded-full shadow-lg"/>
-        </div>
-
-        <!-- Author & Metadata -->
-        <div class="flex flex-col md:flex-row gap-2 md:gap-4 text-sm ">
-            <p class="font-semibold">By: {blog?.expand?.author.username}</p>
-            <p>Published: {new Date(blog?.created).toLocaleDateString()}</p>
-            <p>Updated: {new Date(blog?.updated).toLocaleDateString()}</p>
-        </div>
-    </div>
-
-		<!-- Like Button and Form -->
-		<LikeButton />
-
-    <!-- Animated Scroll Down Indicator (Optional) -->
-    <div class="animate-bounce mt-4 flex">
-      
-        <span class="text-xs flex mt-1">Scroll to read</span>
-		<i class="material-icons text-lg ">expand_more</i>
-    </div>
-</div>
-
-
-    <!-- Blog Image -->
-    <img src={blog?.image} alt={blog?.title} class="w-full h-auto rounded-lg mb-6" />
-
-    <!-- Blog Content -->
-    <div class="text-base-content">
-		{#if $page.data.user}
-		{#if $page.data.user.id === blog.author}
-		<ValiantRichText
-		initialData={blog.content_object}
-		 />
-		<button 
-		class="btn btn-primary"
-		on:click={()=>{
-			const data = getData(); // returns dataBlock[] type
-			saveData(data);
-		  }}>Save</button>
-		{:else}
-		<h3 class="text-xl text-accent md:text-2xl lg:text-3xl font-bold mb-4">
-			you can not edit this blog post. as you are not the author of this blog post. Create your own blog post <a href="/blogs/new" class="link link-primary">here</a>
-		</h3>
-		<ValiantRichText initialData={blog.content_object} viewMode={true} />
-		{/if}
-
-{:else}
-<h3 class="text-xl text-accent md:text-2xl lg:text-3xl font-bold mb-4">
-			It is possible to edit this blog post. Please <a href="/login" class="link link-primary">login</a> to edit.
-		</h3>
-<ValiantRichText initialData={blog.content_object} viewMode={true} />
-		{/if}
-    </div>
-
-    <!-- Blog Tags loop through blog?.expand?.tags and display the name-->
-	<div class="flex flex-wrap mt-8">
-		{#each blog?.expand?.tags as tag}
-		<a
-			href="/blogs/tags/{tag.id}"
-			class="bg-base-200 hover:bg-base-300 font-semibold py-2 px-4 rounded-full mr-2 mb-2"
-		>
-			{tag.name}
-		</a>
-		{/each}
-	</div>
   
-	<Share
-	title={blog.title + ' ' + blog.expand?.author?.username}
-	url={$page.url.href}
-	image={blog?.image}
-	text={`read ${blog.title} by ${blog.expand?.author?.username} at ${$page.url.hostname} free online, high quality`}
-	hashtags={blog?.expand?.tags.map((tag) => tag.name)}
+  <div class="container mx-auto px-4 py-8">
+	<div class="card bg-base-100 shadow-xl">
+	  <div class="card-body">
+		<h2 class="card-title text-3xl">{company.navn}</h2>
+		<p class="text-xl">{company.organisasjonsform.beskrivelse} ({company.organisasjonsform.kode})</p>
+  
+		<div class="divider"></div> <!-- Stylish divider -->
+  
+		<!-- Company Details -->
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+		  <div>
+			<h3 class="text-lg font-bold">General Information</h3>
+			<ul class="list-disc pl-5">
+			  <li>Organization Number: {company.organisasjonsnummer}</li>
+			  <li>Founded: {company.stiftelsesdato}</li>
+			  <li>Employees: {company.antallAnsatte}</li>
+			  <li>Business Type: {company.naeringskode1.beskrivelse}</li>
+			</ul>
+		  </div>
+		  <div>
+			<h3 class="text-lg font-bold">Registration Details</h3>
+			<ul class="list-disc pl-5">
+			  <li>Registered: {company.registreringsdatoEnhetsregisteret}</li>
+			  <li>Corporate Assembly: {company.registrertIForetaksregisteret ? 'Yes' : 'No'}</li>
+			  <li>Bankruptcy: {company.konkurs ? 'Yes' : 'No'}</li>
+			  <li>Under Liquidation: {company.underAvvikling ? 'Yes' : 'No'}</li>
+			</ul>
+		  </div>
+		</div>
+  
+		<div class="divider"></div> <!-- Another stylish divider -->
+  
+		<!-- Address Section -->
+		<div>
+		  <h3 class="text-lg font-bold">Business Address</h3>
+		  <p>{company.forretningsadresse.adresse.join(", ")}</p>
+		  <p>{company.forretningsadresse.postnummer} {company.forretningsadresse.poststed}</p>
+		  <p>{company.forretningsadresse.land}</p>
+		</div>
+  
+		<!-- Optional Components: LikeButton, Chat, Share -->
+		<!-- Example: <LikeButton /> -->
+	  </div>
+	</div>
+  </div>
+  
 
-/>	
-    <!-- Chat Component -->
-    <Chat class="mt-8" />
-</div>
-
-<svelte:head>
-	<title>{blog.title} | valiantlynx</title>
-	<!-- Canonical Link -->
-	<link rel="canonical" href="https://{$page.data.siteName}/" />
-	<!-- Author Meta Tag -->
+  <svelte:head>
+    <title>{company.navn} | altlokalt</title>
+    <!-- Canonical Link -->
+    <link rel="canonical" href={`https://${$page.data.siteName}/enheter/${company.organisasjonsnummer}`} />
 	<meta name="author" content="{$page.data.siteName}" />
-	<!--OWN STUFF-->
-	<link rel="dns-prefetch" href="https://{$page.data.siteName}" />
+    <!-- Description Meta Tag -->
+    <meta name="description" content={`Learn more about ${company.navn}, their services, and company details.`} />
+    <!-- Keywords Meta Tag -->
+    <meta name="keywords" content={`${company.navn}, ${company.organisasjonsform.beskrivelse}, Norwegian Company, ${company.naeringskode1.beskrivelse}`} />
 
-	<meta name="apple-mobile-web-app-title" content={$page.data.siteName} />
+    <!-- Mobile Web App Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content={$page.data.siteName} />
 
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-	<meta
-		name="description"
-		content={blog.summary}
-		/>
-			<!-- Keywords Meta Tag -->
-	<meta name="keywords" content="{blog?.expand?.tags.map((tag) => tag.name)}" />
+    <!-- Open Graph Meta Tags (for social media sharing) -->
+    <meta property="og:title" content={`${company.navn} | altlokalt`} />
+    <meta property="og:type" content="business.business" />
+    <meta property="og:url" content={`https://${$page.data.siteName}/enheter/${company.organisasjonsnummer}`} />
+    <meta property="og:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${entity.navn}`}/>
+    <meta property="og:description" content={`Learn more about ${company.navn} and their business operations in Norway.`} />
+    <meta property="og:site_name" content={$page.data.siteName} />
 
-	<meta name="mobile-web-app-capable" content="yes" />
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${entity.navn}`} />
+    <meta name="twitter:title" content={`${company.navn} | ${$page.data.siteName}`} />
+    <meta name="twitter:description" content={`Learn more about ${company.navn} and their business operations.`} />
+    <meta name="twitter:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${entity.navn}`}/> <!-- Adjust as needed -->
 
-	<!-- Open Graph Meta Tags (for social media sharing) -->
-	<meta property="og:title" content={blog.title} />
-
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content={$page.url.origin} />
-	<meta property="og:image" content={blog?.image}/>
-	<meta property="og:image:alt" content="{$page.data.siteName} Logo" />
-	<meta property="og:site_name" content={$page.data.siteName} />
-
-	<!-- Twitter Meta Tags (for social media sharing) -->
-	<meta name="twitter:card" content={blog.image} />
-	<meta name="twitter:title" content={blog.title} />
-	<meta name="twitter:description" content={blog.summary} />
-	<meta name="twitter:image" content={blog?.image} />
-
-	<!-- Google / Search Engine Tags -->
-	<meta itemprop="name" content={blog.title}/>
-
-	<!-- Facebook Meta Tags (for social media sharing) -->
-	<meta property="fb:image" content={blog.image} />
-	<meta property="fb:app_id" content={$page.data.siteName} />
-	<meta property="fb:admins" content={$page.data.siteName} />
-	<meta property="fb:page_id" content={$page.data.siteName} />
-	<meta property="fb:site_name" content={$page.data.siteName} />
-	<meta property="article:publisher" content={$page.data.siteName} />
-	<meta property="article:author" content={$page.data.siteName} />
-	<meta property="article:section" content={$page.data.siteName} />
-	{#each blog?.expand?.tags as tag}
-		<meta property="article:tag" content={tag.name} />
-	{/each}
-	<meta property="article:published_time" content={$page.data.siteName} />
-	<meta property="article:modified_time" content={$page.data.siteName} />
-	<meta property="article:author:first_name" content={$page.data.siteName} />
-	<meta property="article:author:last_name" content={$page.data.siteName} />
-	<meta property="article:author:username" content={$page.data.siteName} />
-
-	<!-- Schema.org Meta Tags (for SEO) -->
-	<meta itemprop="headline" content={blog.title} />
-	<meta itemprop="description" content={blog.summary} />
-	<meta itemprop="image" content={blog?.image} />
-
-	{#if $page.data.sites}
-		<!-- clarity there is abug in svelte where inside the svript tags i cannot access the variables //! https://stackoverflow.com/questions/63419284/svelte-substitution-in-script-within-sveltehead-->
-		{@html `<script type="text/javascript">
-			(function (c, l, a, r, i, t, y) {
-				c[a] =
-					c[a] ||
-					function () {
-						(c[a].q = c[a].q || []).push(arguments);
-					};
-				t = l.createElement(r);
-				t.async = 1;
-				t.src = 'https://www.clarity.ms/tag/' + i;
-				y = l.getElementsByTagName(r)[0];
-				y.parentNode.insertBefore(t, y);
-			})(window, document, 'clarity', 'script', '${$page.data.sites.clarity_tag}');
-		</script>`}
-
-		<!-- Google tag (gtag.js) there is abug in svelte where inside the svript tags i cannot access the variables //! https://stackoverflow.com/questions/63419284/svelte-substitution-in-script-within-sveltehead -->
-		<!-- Google tag (gtag.js) there is abug in svelte where inside the svript tags i cannot access the variables //! https://stackoverflow.com/questions/63419284/svelte-substitution-in-script-within-sveltehead -->
-		<!-- Google tag (gtag.js) there is abug in svelte where inside the svript tags i cannot access the variables //! https://stackoverflow.com/questions/63419284/svelte-substitution-in-script-within-sveltehead -->
-		<script
-			async
-			src="https://www.googletagmanager.com/gtag/js?id={$page.data.sites.google_tag}"
-		></script>
-		{@html `<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag() {
-				dataLayer.push(arguments);
-			}
-			gtag('js', new Date());
-
-			gtag('config', '${$page.data.sites.google_tag}');
-		</script>`}
-
-		<!-- Google Adsense -->
-		<!-- Google Adsense -->
-		<!-- Google Adsense -->
-		<script
-			async
-			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={$page.data.sites
-				.google_ads_client}"
-			crossorigin="anonymous"
-		></script>
-	{/if}
+    <!-- Additional Meta Tags for SEO and Social Media -->
+    <!-- Schema.org for Google -->
+    <meta itemprop="name" content={`${company.navn} | ${$page.data.siteName}`} />
+    <meta itemprop="description" content={`Information about ${company.navn}, a ${company.organisasjonsform.beskrivelse} in Norway.`} />
+    <meta itemprop="image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${entity.navn}`}/> <!-- Adjust as needed -->
 </svelte:head>
-
