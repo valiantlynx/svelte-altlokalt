@@ -13,7 +13,12 @@
 			"companies": "Selskap"
 		},
 		"norway": "Noreg",
-		"norwegianCompany": "Norsk bedrift"
+		"norwegianCompany": "Norsk bedrift",
+		"additionalInfo": "Extra info",
+		"sectorCode": "Sektor",
+		"registeredInVoluntaryRegistry": "Frivillig",
+		"dialect": "Målform",
+		"postalAddress": "Post addresse"
 	},
 	"page": {
 		"lang": {

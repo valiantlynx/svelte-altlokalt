@@ -13,7 +13,12 @@
 		"companies": "Companies"
 	  },
 	  "norway": "Norway",
-	  "norwegianCompany": "Norwegian company"
+	  "norwegianCompany": "Norwegian company",
+	  "additionalInfo": "Additional info",
+	  "sectorCode": "Sector",
+	  "registeredInVoluntaryRegistry": "Nonprofit",
+	  "dialect": "Dialect",
+	  "postalAddress": "Post address"
 	},
 	"page": {
 	  "lang": {
