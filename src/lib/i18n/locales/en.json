@@ -1,5 +1,7 @@
 {
 	"common": {
+	  "yes": "yes",
+	  "no": "no",
 	  "send": "Send",
 	  "login": "Login",
 	  "readMore": "Read More",
@@ -9,7 +11,9 @@
 		"contact": "Contact",
 		"blog": "Blog",
 		"companies": "Companies"
-	  }
+	  },
+	  "norway": "Norway",
+	  "norwegianCompany": "Norwegian company"
 	},
 	"page": {
 	  "lang": {

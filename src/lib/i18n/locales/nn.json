@@ -1,46 +1,49 @@
 {
 	"common": {
-	  "send": "Send",
-	  "login": "Logg Inn",
-	  "readMore": "Les Meir",
-	  "nav": {
-		"home": "Heim",
-		"about": "Om Oss",
-		"contact": "Kontakt",
-		"blog": "Blogg",
-		"companies": "Selskap"
-	  }
+		"yes": "Ja",
+		"no": "Nei",
+		"send": "Send",
+		"login": "Logg Inn",
+		"readMore": "Les Meir",
+		"nav": {
+			"home": "Heim",
+			"about": "Om Oss",
+			"contact": "Kontakt",
+			"blog": "Blogg",
+			"companies": "Selskap"
+		},
+		"norway": "Noreg",
+		"norwegianCompany": "Norsk bedrift"
 	},
 	"page": {
-	  "lang": {
-		"english": "Engelsk",
-		"norwegian_bokmaal": "Norsk bokmål",
-		"norwegian_nynorsk": "Norsk nynorsk"
-	  },
-	  "home": {
-		"title": "Heimeside",
-		"description": "Oppdag norske selskap og innovasjonar."
-	  },
-	  "enheter": {
-		"title": "Selskapsdetaljar",
-		"description": "Utforsk detaljert informasjon om norske selskap.",
-		"generalInfo": "Generell Informasjon",
-		"organizationNumber": "Organisasjonsnummer",
-		"founded": "Stifta",
-		"employees": "Tal på tilsette",
-		"businessType": "Forretningstype",
-		"registrationDetails": "Registreringsdetaljar",
-		"registered": "Registrert",
-		"corporateAssembly": "Foretakssamling",
-		"bankruptcy": "Konkurs",
-		"underLiquidation": "Under Avvikling",
-		"businessAddress": "Forretningsadresse"
-	  },
-	  "enheter_organisasjonsnummer": {
-		"title": "{companyName} | Selskapsdetaljar",
-		"description": "Detaljert visning av {companyName}, eit norsk selskap.",
-		"notFound": "Selskapet blei ikkje funne."
-	  }
+		"lang": {
+			"english": "Engelsk",
+			"norwegian_bokmaal": "Norsk bokmål",
+			"norwegian_nynorsk": "Norsk nynorsk"
+		},
+		"home": {
+			"title": "Heimeside",
+			"description": "Oppdag norske selskap og innovasjonar."
+		},
+		"enheter": {
+			"title": "Selskapsdetaljar",
+			"description": "Utforsk detaljert informasjon om norske selskap.",
+			"generalInfo": "Generell Informasjon",
+			"organizationNumber": "Organisasjonsnummer",
+			"founded": "Stifta",
+			"employees": "Tal på tilsette",
+			"businessType": "Forretningstype",
+			"registrationDetails": "Registreringsdetaljar",
+			"registered": "Registrert",
+			"corporateAssembly": "Foretakssamling",
+			"bankruptcy": "Konkurs",
+			"underLiquidation": "Under Avvikling",
+			"businessAddress": "Forretningsadresse"
+		},
+		"enheter_organisasjonsnummer": {
+			"title": "{companyName} | Selskapsdetaljar",
+			"description": "Detaljert visning av {companyName}, eit norsk selskap.",
+			"notFound": "Selskapet blei ikkje funne."
+		}
 	}
-  }
-  
+}
