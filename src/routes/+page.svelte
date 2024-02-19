@@ -53,7 +53,7 @@
   }
 </script>
 
-<Carousel />
+<!-- <Carousel /> -->
 <BlogGrid />
 <button
 class="transition cursor-pointer xl:mb-5 mr-5 xl:mr-0"

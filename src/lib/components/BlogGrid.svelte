@@ -1,12 +1,12 @@
 <script>
-	import BlogCards from '$lib/components/BlogCards.svelte';
+	import EntityCards from '$lib/components/EntityCards.svelte';
 	import { page } from '$app/stores';
-	const blogs = $page.data.blogs;
+	const entities = $page.data.entities;
 </script>
 
 <div class="flex flex-wrap">
-	{#each blogs.items as blog (blog.id)}
-		<BlogCards blog={blog} />
+	{#each entities._embedded.enheter as entity (entity.id)}
+		<EntityCards entity={entity} />
 	{/each}
 </div>
 <!-- if they want to see more available to go to the features page -->
