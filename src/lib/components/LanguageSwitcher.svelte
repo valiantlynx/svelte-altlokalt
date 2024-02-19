@@ -18,6 +18,7 @@
 <div class="text-center">
 	<select bind:value={$selectedLanguage} on:change={changeLanguage($selectedLanguage)}>
 		<option value="en">{$_('page.lang.english')}</option>
-		<option value="nb">{$_('page.lang.norwegian')}</option>
+		<option value="nb">{$_('page.lang.norwegian_bokmaal')}</option>
+		<option value="nn">{$_('page.lang.norwegian_nynorsk')}</option>
 	</select>
 </div>

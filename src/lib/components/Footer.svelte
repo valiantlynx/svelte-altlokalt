@@ -1,6 +1,7 @@
 <script>
 	import { site } from '@valiantlynx/general-config';
 	import Icon from '@iconify/svelte';
+	import LanguageSwitcher from './LanguageSwitcher.svelte';
 </script>
 <footer class="footer footer-center p-10 bg-base-300 text-base-content rounded mt-auto">
 	<div class="grid grid-flow-col gap-4">
@@ -10,6 +11,7 @@
 		<a href="/pricing" class="link link-hover">Pricing</a>
 		<a href="/sitemap.xml" class="link link-hover">Sitemap</a>
 	</div>
+	<LanguageSwitcher />
 	<div>
 		<div class="grid grid-flow-col gap-4">
 			<a href="https://www.facebook.com/valiantlynx/" class="link link-hover hover:link-primary"
