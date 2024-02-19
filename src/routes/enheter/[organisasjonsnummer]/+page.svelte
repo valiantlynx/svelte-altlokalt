@@ -1,5 +1,4 @@
 <script>
-  	import LikeButton from '$lib/components/blog/LikeButton.svelte';
     import { page } from '$app/stores';
 
     const company = $page.data.companyData;
@@ -35,7 +34,7 @@
 		  </div>
 		</div>
   
-		<div class="divider"></div> <!-- Another stylish divider -->
+		<div class="divider"></div>
   
 		<!-- Address Section -->
 		<div>
@@ -44,9 +43,6 @@
 		  <p>{company.forretningsadresse.postnummer} {company.forretningsadresse.poststed}</p>
 		  <p>{company.forretningsadresse.land}</p>
 		</div>
-  
-		<!-- Optional Components: LikeButton, Chat, Share -->
-		<!-- Example: <LikeButton /> -->
 	  </div>
 	</div>
   </div>
@@ -70,19 +66,19 @@
     <meta property="og:title" content={`${company.navn} | altlokalt`} />
     <meta property="og:type" content="business.business" />
     <meta property="og:url" content={`https://${$page.data.siteName}/enheter/${company.organisasjonsnummer}`} />
-    <meta property="og:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${entity.navn}`}/>
+    <meta property="og:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`}/>
     <meta property="og:description" content={`Learn more about ${company.navn} and their business operations in Norway.`} />
     <meta property="og:site_name" content={$page.data.siteName} />
 
     <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${entity.navn}`} />
+    <meta name="twitter:card" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`} />
     <meta name="twitter:title" content={`${company.navn} | ${$page.data.siteName}`} />
     <meta name="twitter:description" content={`Learn more about ${company.navn} and their business operations.`} />
-    <meta name="twitter:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${entity.navn}`}/> <!-- Adjust as needed -->
+    <meta name="twitter:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`}/> <!-- Adjust as needed -->
 
     <!-- Additional Meta Tags for SEO and Social Media -->
     <!-- Schema.org for Google -->
     <meta itemprop="name" content={`${company.navn} | ${$page.data.siteName}`} />
     <meta itemprop="description" content={`Information about ${company.navn}, a ${company.organisasjonsform.beskrivelse} in Norway.`} />
-    <meta itemprop="image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${entity.navn}`}/> <!-- Adjust as needed -->
+    <meta itemprop="image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`}/> <!-- Adjust as needed -->
 </svelte:head>
