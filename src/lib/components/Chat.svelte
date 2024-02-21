@@ -5,6 +5,7 @@
 	import { pb } from '$lib/utils/api';
 	import { _ } from 'svelte-i18n';
 
+	const company = $page.data.companyData;
 	let newMessage = '';
 	/**
 	 * @type {any[]}
@@ -41,10 +42,14 @@
 
 	async function getInitialMessages() {
 		try {
-			const resultList = await pb.collection('chat_valiantlynx').getList(1, 50, {
+			console.log($page.params.organisasjonsnummer)
+			const resultList = await pb.collection('chat_altlokalt').getList(1, 50, {
 				sort: 'created',
+				filter: $page.params.organisasjonsnummer
+					? `organisasjonsnummer='${company.organisasjonsnummer}'`: `organisasjonsnummer='${company.organisasjonsnummer}'`,
 				expand: 'sender'
 			});
+			console.log("----->", resultList)
 
 			return resultList.items;
 		} catch (error) {
@@ -78,7 +83,7 @@
 
 	onMount(async () => {
 		messages = await getInitialMessages();
-		unsubscribe = await pb.collection('chat_valiantlynx').subscribe('*', handleRealtimeMessage);
+		unsubscribe = await pb.collection('chat_altlokalt').subscribe('*', handleRealtimeMessage);
 	});
 
 	onDestroy(() => {
@@ -89,9 +94,10 @@
 		const data = {
 			message: newMessage,
 			sender: $page.data.user?.id,
+			organisasjonsnummer: company.organisasjonsnummer,
 			receiver: $page.data.user?.id
 		};
-		await pb.collection('chat_valiantlynx').create(data);
+		await pb.collection('chat_altlokalt').create(data);
 		newMessage = '';
 		canAutoScroll = true;
 		autoScroll();
