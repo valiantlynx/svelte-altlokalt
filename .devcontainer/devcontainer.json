@@ -1,7 +1,7 @@
 {
-  "name": "valiantlynx-turborepo",
+  "name": "svelte-altlokalt-dev",
   "dockerComposeFile": ["./docker-compose.yml"],
-  "service": "valiantlynx_env",
+  "service": "altlokalt-dev",
   "workspaceFolder": "/app",
   "customizations": {
     "vscode": {
