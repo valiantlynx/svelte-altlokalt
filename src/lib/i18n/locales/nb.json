@@ -19,7 +19,7 @@
 			"send": "Kommentar sendt",
 			"error": "Feil ved sending av kommentar",
 			"delivered": "kommentar levert"
-		  },		  
+		},
 		"norway": "Norge",
 		"norwegianCompany": "Norsk bedrift",
 		"additionalInfo": "Extra info",
@@ -39,18 +39,18 @@
 			"description": "Oppdag norske selskaper og innovasjoner.",
 			"features": [
 				{
-				  "title": "Utforsk Bedrifter",
-				  "summary": "Oppdag og utforsk detaljer om norske bedrifter.",
-				  "image": "https://picsum.photos/800/450?business",
-				  "alt": "Bilde av en bedrift"
+					"title": "Utforsk Bedrifter",
+					"summary": "Oppdag og utforsk detaljer om norske bedrifter.",
+					"image": "https://picsum.photos/800/450?business",
+					"alt": "Bilde av en bedrift"
 				},
 				{
-				  "title": "Bedriftsdata",
-				  "summary": "Få detaljert informasjon om hver enkelt bedrift.",
-				  "image": "https://picsum.photos/800/450?data",
-				  "alt": "Bilde av bedriftsdata"
+					"title": "Bedriftsdata",
+					"summary": "Få detaljert informasjon om hver enkelt bedrift.",
+					"image": "https://picsum.photos/800/450?data",
+					"alt": "Bilde av bedriftsdata"
 				}
-			  ]
+			]
 		},
 		"enheter": {
 			"title": "Selskapsdetaljer",
@@ -76,6 +76,6 @@
 			"title": "Oversikt over Enheter",
 			"description": "Bla gjennom vår omfattende liste over enheter. Oppdag bedrifter, organisasjoner og mer.",
 			"keywords": "enheter, bedrifter, organisasjoner, Norge"
-		  }
+		}
 	}
 }

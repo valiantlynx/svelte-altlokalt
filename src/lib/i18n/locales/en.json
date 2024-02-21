@@ -1,82 +1,81 @@
 {
 	"common": {
-	  "yes": "yes",
-	  "no": "no",
-	  "send": "Send",
-	  "login": "Login",
-	  "readMore": "Read More",
-	  "nav": {
-		"home": "Home",
-		"about": "About Us",
-		"contact": "Contact",
-		"blog": "Blog",
-		"companies": "Companies"
-	  },
-	  "chat": {
-		"anonymous": "Anonymous",
-		"description": "Join the Discussion",
-		"placeholder": "Type your message here...",
-		"send": "Comment sent",
-		"error": "Error sending comment",
-		"delivered": "comment delivered"
-	  },
-	  "norway": "Norway",
-	  "norwegianCompany": "Norwegian company",
-	  "additionalInfo": "Additional info",
-	  "sectorCode": "Sector",
-	  "registeredInVoluntaryRegistry": "Nonprofit",
-	  "dialect": "Dialect",
-	  "postalAddress": "Post address"
+		"yes": "yes",
+		"no": "no",
+		"send": "Send",
+		"login": "Login",
+		"readMore": "Read More",
+		"nav": {
+			"home": "Home",
+			"about": "About Us",
+			"contact": "Contact",
+			"blog": "Blog",
+			"companies": "Companies"
+		},
+		"chat": {
+			"anonymous": "Anonymous",
+			"description": "Join the Discussion",
+			"placeholder": "Type your message here...",
+			"send": "Comment sent",
+			"error": "Error sending comment",
+			"delivered": "comment delivered"
+		},
+		"norway": "Norway",
+		"norwegianCompany": "Norwegian company",
+		"additionalInfo": "Additional info",
+		"sectorCode": "Sector",
+		"registeredInVoluntaryRegistry": "Nonprofit",
+		"dialect": "Dialect",
+		"postalAddress": "Post address"
 	},
 	"page": {
-	  "lang": {
-		"english": "English",
-		"norwegian_bokmaal": "Norwegian bokmål",
-		"norwegian_nynorsk": "Norwegian nynorsk"
-	  },
-	  "home": {
-		"title": "Homepage",
-		"description": "Discover Norwegian companies and innovations.",
-		"features": [
-			{
-			  "title": "Explore Companies",
-			  "summary": "Discover and explore details about Norwegian companies.",
-			  "image": "https://picsum.photos/800/450?business",
-			  "alt": "Image of a company"
-			},
-			{
-			  "title": "Company Data",
-			  "summary": "Get detailed information on each company.",
-			  "image": "https://picsum.photos/800/450?data",
-			  "alt": "Image of company data"
-			}
-		  ]
-	  },
-	  "enheter": {
-		"title": "Company Details",
-		"description": "Explore detailed information about Norwegian companies.",
-		"generalInfo": "General Information",
-		"organizationNumber": "Organization Number",
-		"founded": "Founded On",
-		"employees": "Number of Employees",
-		"businessType": "Business Type",
-		"registrationDetails": "Registration Details",
-		"registered": "Registered",
-		"corporateAssembly": "Corporate Assembly",
-		"bankruptcy": "Bankruptcy",
-		"underLiquidation": "Under Liquidation",
-		"businessAddress": "Business Address"
-	  },
-	  "enheter_organisasjonsnummer": {
-		"title": "{companyName} | Company Details",
-		"description": "Detailed view of {companyName}, a Norwegian company.",
-		"notFound": "Company not found."
-	  },
-	  "entitiesListing": {
-		"title": "Entities Listing",
-		"description": "Browse through our comprehensive listing of entities. Discover businesses, organizations, and more.",
-		"keywords": "entities, businesses, organizations, Norway"
-	  }
+		"lang": {
+			"english": "English",
+			"norwegian_bokmaal": "Norwegian bokmål",
+			"norwegian_nynorsk": "Norwegian nynorsk"
+		},
+		"home": {
+			"title": "Homepage",
+			"description": "Discover Norwegian companies and innovations.",
+			"features": [
+				{
+					"title": "Explore Companies",
+					"summary": "Discover and explore details about Norwegian companies.",
+					"image": "https://picsum.photos/800/450?business",
+					"alt": "Image of a company"
+				},
+				{
+					"title": "Company Data",
+					"summary": "Get detailed information on each company.",
+					"image": "https://picsum.photos/800/450?data",
+					"alt": "Image of company data"
+				}
+			]
+		},
+		"enheter": {
+			"title": "Company Details",
+			"description": "Explore detailed information about Norwegian companies.",
+			"generalInfo": "General Information",
+			"organizationNumber": "Organization Number",
+			"founded": "Founded On",
+			"employees": "Number of Employees",
+			"businessType": "Business Type",
+			"registrationDetails": "Registration Details",
+			"registered": "Registered",
+			"corporateAssembly": "Corporate Assembly",
+			"bankruptcy": "Bankruptcy",
+			"underLiquidation": "Under Liquidation",
+			"businessAddress": "Business Address"
+		},
+		"enheter_organisasjonsnummer": {
+			"title": "{companyName} | Company Details",
+			"description": "Detailed view of {companyName}, a Norwegian company.",
+			"notFound": "Company not found."
+		},
+		"entitiesListing": {
+			"title": "Entities Listing",
+			"description": "Browse through our comprehensive listing of entities. Discover businesses, organizations, and more.",
+			"keywords": "entities, businesses, organizations, Norway"
+		}
 	}
-  }
-  
+}
