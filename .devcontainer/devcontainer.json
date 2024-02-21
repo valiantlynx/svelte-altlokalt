@@ -1,6 +1,6 @@
 {
   "name": "svelte-altlokalt-dev",
-  "dockerComposeFile": ["./docker-compose.yml"],
+  "dockerComposeFile": ["../docker-compose.dev.yml"],
   "service": "altlokalt-dev",
   "workspaceFolder": "/app",
   "customizations": {
