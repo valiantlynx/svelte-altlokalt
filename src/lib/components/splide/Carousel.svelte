@@ -3,10 +3,11 @@
   import { onMount } from "svelte";
   import "@splidejs/svelte-splide/css";
   import "./splide-override.css";
-  import { _ } from 'svelte-i18n';
+  import { _, init, locale } from 'svelte-i18n';
+  import { writable } from 'svelte/store';
 
-// Assuming features data is fetched from the localized JSON files
-let features = $_('page.home.features');
+  const features = writable([]);
+
 
   // set up carousel config
   const mainOptions = {
@@ -27,10 +28,16 @@ let features = $_('page.home.features');
     updateOnMove: true,
   };
 
-  // sync carousels
   let main;
   let thumbs;
-  onMount(() => {
+
+  onMount(async () => {
+    // Assuming your localization initialization happens outside this component,
+    // ensure it's completed before fetching the localized content.
+    await init({ fallbackLocale: 'en', initialLocale: $locale });
+    const localizedFeatures = $_('page.home.features');
+    features.set(localizedFeatures);
+
     if (main && thumbs) {
       main.sync(thumbs.splide);
     }
@@ -40,14 +47,14 @@ let features = $_('page.home.features');
 <div class="gallery">
   <div class="gallery--main">
     <Splide bind:this={main} options={mainOptions}>
-      {#each features as feature}
+      {#each $features as feature}
       <SplideSlide>
         <a 
           href={`/enheter`}
           class="hover:cursor-pointer hover:underline hover:text-secondary"
           >
           <div class="feature-hero">
-            <img src={feature.image} alt={feature.alt} />
+            <img src={feature?.image} alt={feature.alt} />
             <div class=" absolute p-10 bg-secondary text-secondary-content bg-opacity-75 bottom-5 left-5 right-5 rounded-md">
               <h2 class="text-2xl font-bold text-secondary-content">
               {feature.title}</h2>
@@ -64,7 +71,7 @@ let features = $_('page.home.features');
 
   <div class="gallery--thumbs">
     <Splide id="gallery--thumbs" bind:this={thumbs} options={thumbsOptions}>
-      {#each features as feature}
+      {#each $features as feature}
       <SplideSlide>
         <img src={feature.image} alt={feature.alt} />
       </SplideSlide>

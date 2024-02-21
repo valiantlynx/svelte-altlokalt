@@ -25,7 +25,7 @@
         renotify: true,
         image: "og.png",
         tag: "notification-sample",
-        lang: "en",
+        lang: "nb",
         dir: "ltr",
         badge: "logo.svg",
         sound: "mixkit-bubble-pop-up-alert-notification-2357.wav",
