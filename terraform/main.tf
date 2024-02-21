@@ -9,14 +9,14 @@ terraform {
 
 provider "docker" {}
 
-resource "docker_image" "svelte_manga" {
-  name         = "valiantlynx/svelte-manga" # Adjust this to match your image name
+resource "docker_image" "svelte_altlokalt" {
+  name         = "valiantlynx/svelte-altlokalt" # Adjust this to match your image name
   keep_locally = true
 }
 
-resource "docker_container" "svelte_manga" {
-  image = docker_image.svelte_manga.image_id
-  name  = "svelte-manga"
+resource "docker_container" "svelte_altlokalt" {
+  image = docker_image.svelte_altlokalt.image_id
+  name  = "svelte-altlokalt"
 
   ports {
     internal = 3000
