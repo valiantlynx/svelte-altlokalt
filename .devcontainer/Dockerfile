@@ -1,50 +1,39 @@
-FROM node:18-alpine AS base
+# Use Ubuntu as the base image to set up the development environment
+FROM ubuntu:20.04 AS dev
 
-# This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
-# Make sure you update both files!
+# Avoid prompts from apt
+ENV DEBIAN_FRONTEND=noninteractive
 
-FROM base AS builder
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
-RUN apk update
-# Set working directory
-WORKDIR /app
-COPY . .
+# Update and install dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    # Install Node.js
+    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
+    # Clean up
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Add lockfile and package.json's of isolated subworkspace
-FROM base AS installer
-RUN apk add --no-cache libc6-compat
-RUN apk update
-WORKDIR /app
-
-# First install the dependencies (as they change less often)
-COPY .gitignore .gitignore
-COPY --from=builder /app/ .
-COPY --from=builder /app/yarn.lock ./yarn.lock
-RUN yarn install
-
-# Build the project
-COPY --from=builder /app/ .
-
-# set the deploy target to node
-RUN DEPLOY_TARGET=node yarn build
-
-
-# Create a new stage for the runner
-FROM base AS runner
+# Set the working directory in the container
 WORKDIR /app
 
-# Don't run production as root - add a non-root user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 svelte
+# Copy the project files into the container
+COPY ../ .
+
+# Install Yarn and project dependencies
+RUN npm install -g yarn && yarn install
+
+# Expose the port the app runs on
+EXPOSE 3000
+EXPOSE 5173
+EXPOSE 4173
+
+# Use bash to handle terminal commands
+SHELL ["/bin/bash", "-c"]
+
+# Add a user for the development environment
+RUN useradd -m svelte && chown -R svelte:svelte /app
 USER svelte
 
-
-# Copy the necessary files from the installer stage
-COPY --from=installer /app/package.json .
-COPY --from=installer /app/build /app/build
-
-EXPOSE 3000
-
-# Modify this line to start your SvelteKit application, e.g., run your server.js or the appropriate script.
-CMD [ "node", "build" ]
+# Start the SvelteKit app in development mode
+CMD ["yarn", "dev"]
