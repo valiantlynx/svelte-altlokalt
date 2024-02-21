@@ -19,8 +19,8 @@ export const actions = {
 		};
 
 		try {
-			await event.locals.pb.collection('users_valiantlynx').create(pbData);
-			await event.locals.pb.collection('users_valiantlynx').requestVerification(pbData.email);
+			await event.locals.pb.collection('users_altlokalt').create(pbData);
+			await event.locals.pb.collection('users_altlokalt').requestVerification(pbData.email);
 		} catch (err) {
 			if (err.data?.data?.username?.code) {
 				if (!pbData.username) {
@@ -66,7 +66,7 @@ export const actions = {
 		return;
 	},
 	oauth2google: async (event) => {
-		const authMethods = await event.locals.pb?.collection('users_valiantlynx').listAuthMethods(); // generates a state and a verifier
+		const authMethods = await event.locals.pb?.collection('users_altlokalt').listAuthMethods(); // generates a state and a verifier
 		if (!authMethods) {
 			return {
 				authProviders: ''

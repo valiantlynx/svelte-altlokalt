@@ -22,11 +22,11 @@ export const handle = async ({ event, resolve }) => {
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
 	try {
 		if (event.locals.pb.authStore.isValid) {
-			await event.locals.pb.collection('users_valiantlynx').authRefresh();
+			await event.locals.pb.collection('users_altlokalt').authRefresh();
 			event.locals.user = serializeNonPOJOs(event.locals.pb.authStore.model);
 		} else if (storedAuth) {
 			event.locals.pb.authStore = storedAuth;
-			await event.locals.pb.collection('users_valiantlynx').authRefresh();
+			await event.locals.pb.collection('users_altlokalt').authRefresh();
 			event.locals.user = serializeNonPOJOs(event.locals.pb.authStore.model);
 		}
 	} catch (_) {

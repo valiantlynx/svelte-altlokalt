@@ -14,7 +14,7 @@ export const actions = {
 		const password = data.get('password');
 		try {
 			// Authenticate the user and get the token from the server
-			await event.locals.pb.collection('users_valiantlynx').authWithPassword(email, password);
+			await event.locals.pb.collection('users_altlokalt').authWithPassword(email, password);
 			// get their IP address
 			// console.log('event', event.getClientAddress());
 		} catch (err) {
@@ -29,7 +29,7 @@ export const actions = {
 		throw redirect(303, '/dashboard');
 	},
 	oauth2google: async (event) => {
-		const authMethods = await event.locals.pb?.collection('users_valiantlynx').listAuthMethods(); // generates a state and a verifier
+		const authMethods = await event.locals.pb?.collection('users_altlokalt').listAuthMethods(); // generates a state and a verifier
 		if (!authMethods) {
 			return {
 				authProviders: ''

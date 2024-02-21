@@ -42,15 +42,12 @@
 
 	async function getInitialMessages() {
 		try {
-			console.log($page.params.organisasjonsnummer)
 			const resultList = await pb.collection('chat_altlokalt').getList(1, 50, {
 				sort: 'created',
 				filter: $page.params.organisasjonsnummer
-					? `organisasjonsnummer='${company.organisasjonsnummer}'`: `organisasjonsnummer='${company.organisasjonsnummer}'`,
+					? `organisasjonsnummer='${company.organisasjonsnummer}'`: ``,
 				expand: 'sender'
 			});
-			console.log("----->", resultList)
-
 			return resultList.items;
 		} catch (error) {
 			console.error('Fetching initial messages error:', error);
@@ -64,7 +61,7 @@
 	async function handleRealtimeMessage({ action, record }) {
 		try {
 			if (action === 'create') {
-				const sender = await pb.collection('users_valiantlynx').getOne(record.sender);
+				const sender = await pb.collection('users_altlokalt').getOne(record.sender);
 
 				record.expand = { sender };
 				messages = [...messages, record];
@@ -93,9 +90,9 @@
 	async function sendMessage() {
 		const data = {
 			message: newMessage,
-			sender: $page.data.user?.id,
-			organisasjonsnummer: company.organisasjonsnummer,
-			receiver: $page.data.user?.id
+			sender: $page.data.user?.id ? $page.data.user?.id : 'vjqw7rzlxvxkr16',
+			organisasjonsnummer: company?.organisasjonsnummer,
+			receiver: $page.data.user?.id ? $page.data.user?.id : 'vjqw7rzlxvxkr16',
 		};
 		await pb.collection('chat_altlokalt').create(data);
 		newMessage = '';

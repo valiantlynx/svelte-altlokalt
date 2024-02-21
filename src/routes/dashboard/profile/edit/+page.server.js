@@ -11,7 +11,7 @@ export const actions = {
 
 		try {
 			const { username, avatar } = await locals.pb
-				.collection('users_valiantlynx')
+				.collection('users_altlokalt')
 				.update(locals?.user?.id, data);
 
 			locals.user.username = username;

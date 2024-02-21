@@ -8,7 +8,7 @@ export const actions = {
 
 		try {
 			// Authenticate the user and get the token from the server
-			await event.locals.pb.collection('users_valiantlynx').requestPasswordReset(email);
+			await event.locals.pb.collection('users_altlokalt').requestPasswordReset(email);
 		} catch (err) {
 			if (err.response?.data.email?.message) {
 				throw error(err.status, `Your email ${err.response?.data.email?.message}`);

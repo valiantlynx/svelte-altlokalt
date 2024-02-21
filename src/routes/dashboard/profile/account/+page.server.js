@@ -5,7 +5,7 @@ export const actions = {
 		const data = Object.fromEntries(await request.formData());
 
 		try {
-			await locals.pb.collection('users_valiantlynx').requestEmailChange(data.email);
+			await locals.pb.collection('users_altlokalt').requestEmailChange(data.email);
 		} catch (err) {
 			throw error(err.status, err.message);
 		}
@@ -20,13 +20,13 @@ export const actions = {
 
 		try {
 			await locals.pb
-				.collection('users_valiantlynx')
+				.collection('users_altlokalt')
 				.getFirstListItem(`username="${data.username}"`);
 		} catch (err) {
 			if (err.status === 404) {
 				try {
 					const { username } = await locals.pb
-						.collection('users_valiantlynx')
+						.collection('users_altlokalt')
 						.update(locals.user.id, { username: data.username });
 					locals.user.username = username;
 					return {
@@ -46,7 +46,7 @@ export const actions = {
 		const data = Object.fromEntries(await request.formData());
 
 		try {
-			await locals.pb.collection('users_valiantlynx').update(locals.user.id, data);
+			await locals.pb.collection('users_altlokalt').update(locals.user.id, data);
 			locals.pb.authStore.clear();
 		} catch (err) {
 			console.error('Error: ', err);
