@@ -1,8 +1,8 @@
 {
   "name": "valiantlynx-turborepo",
-  "dockerComposeFile": ["../docker-compose.dev.yml"],
+  "dockerComposeFile": ["./docker-compose.yml"],
   "service": "valiantlynx_env",
-  "workspaceFolder": "/home/developer",
+  "workspaceFolder": "/app",
   "customizations": {
     "vscode": {
       "extensions": [
