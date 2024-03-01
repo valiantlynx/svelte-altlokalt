@@ -2,18 +2,6 @@ name: Terraform CI CD Pipeline for Deploying AWS Resources
 run-name: ${{ github.actor }} has triggered the pipeline
 
 on:
-  push:
-    branches:
-      - 'main'
-    paths:
-      - 'terraform/**'
-      - 'ansible/**'
-  pull_request:
-    branches:
-      - 'main'
-    paths:
-      - 'terraform/**'
-      - 'ansible/**'
   workflow_dispatch:
   workflow_run:
     workflows: ["svelte-altlokalt"]  # This triggers the deployment after ollama-docker workflow completes
