@@ -1,57 +1,28 @@
-- name: Ensure Certbot Nginx Options File Exists
-  block:
-    - name: Check if options-ssl-nginx.conf exists
-      stat:
-        path: /etc/letsencrypt/options-ssl-nginx.conf
-      register: options_ssl_nginx_conf
-
-    - name: Create minimal options-ssl-nginx.conf if missing
-      copy:
-        dest: /etc/letsencrypt/options-ssl-nginx.conf
-        content: |
-          ssl_session_cache shared:le_nginx_SSL:1m;
-          ssl_session_timeout 1440m;
-          ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-          ssl_prefer_server_ciphers on;
-      when: not options_ssl_nginx_conf.stat.exists
-
-- name: Install Certbot and Nginx plugin
-  become: true
+- name: Install Certbot
   apt:
     name: python3-certbot-nginx
     state: present
 
-- name: Request Certificates with Certbot for all domains
-  become: true
-  shell: |
-    certbot --nginx \
-    {% for domain in item.domains -%}
-    -d {{ domain }} \
-    {% endfor %}
-    --expand --non-interactive --agree-tos -m valiantlynxz@gmail.com --redirect
-  loop: "{{ docker_containers }}"
-  when: item.ssl_enabled | default(false)
-  args:
-    creates: "/etc/letsencrypt/live/{{ item.domains[0] }}/fullchain.pem"
-  ignore_errors: yes
+- name: Generate list of unique domains
+  set_fact:
+    unique_domains_list: "{{ docker_containers | map(attribute='domains') | flatten | unique }}"
 
-- name: Verify Certificate Creation for Each Domain
+- name: Request Certificates with Certbot for unique domains
   become: true
-  stat:
-    path: "/etc/letsencrypt/live/{{ item.domains[0] }}/fullchain.pem"
-  loop: "{{ docker_containers }}"
-  when: item.ssl_enabled | default(false)
-  register: cert_files
+  shell: certbot --nginx -d {{ unique_domains_list | join(' -d ') }} --expand --non-interactive --agree-tos -m valiantlynxz@gmail.com --redirect
   ignore_errors: yes
+  register: certbot_command
+  changed_when: "'Congratulations' in certbot_command.stdout"
 
-- name: Log Missing Certificates
-  debug:
-    msg: "Certificate missing for {{ item.item.domains[0] }}."
-  loop: "{{ cert_files.results }}"
-  when: not item.stat.exists
+- name: Reload Nginx if certificates were successfully obtained
+  become: true
+  service:
+    name: nginx
+    state: reloaded
+  when: certbot_command is changed
+
 
 - name: Setup automatic renewal of SSL certificates
-  become: true
   cron:
     name: "Renew Let's Encrypt certificates"
     special_time: daily
