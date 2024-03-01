@@ -1,5 +1,5 @@
-name: Terraform CI CD Pipeline for Deploying AWS Resources
-run-name: ${{ github.actor }} has triggered the pipeline
+name: Deploy
+run-name: ${{ github.actor }} is deploying 🚀🚀🚀
 
 on:
   workflow_dispatch:
