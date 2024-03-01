@@ -1,6 +1,6 @@
 name: svelte-altlokalt
 
-run-name: ${{ github.actor }} is building svelte-altlokalt 🚀
+run-name: ${{ github.actor }} is building svelte-altlokalt image 📷
 
 on:
   push:
