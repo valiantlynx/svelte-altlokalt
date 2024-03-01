@@ -7,19 +7,21 @@ on:
     branches:
       - 'main'
     paths:
-      - '*'
+      - '**'
   pull_request:
     branches:
       - 'main'
     paths:
-      - '*'
+      - '**'
   schedule:
     - cron: '0 0 * * 0'
   workflow_dispatch:
+  workflow_call:  # Added to allow this workflow to be called by other workflows
+
 
 jobs:
   build-and-push-images:
-    name: Build altlokat
+    name: Build svelte-altlokalt
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -72,7 +74,9 @@ jobs:
         flavor: |
           latest=false
         tags: |
-          type=raw,value=latest       
+          type=sha,prefix=commit-,format=long
+          type=raw,value=latest
+       
 
     - name: Build and tag Docker image and push to Docker Hub
       uses: docker/build-push-action@v2
