@@ -47,7 +47,7 @@ data "template_file" "inventory" {
 resource "local_file" "dynamic_inventory" {
   depends_on = [ aws_instance.web ]
 
-  filename = "${abspath(path.module)}/dynamic_inventory.ini"
+  filename = "${abspath(path.module)}/../../../ansible/inventory/dynamic_inventory.ini"
   content  = data.template_file.inventory.rendered
 
   provisioner "local-exec" {

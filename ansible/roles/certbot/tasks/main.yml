@@ -1,0 +1,17 @@
+- name: Install Certbot
+  apt:
+    name: python3-certbot-nginx
+    state: present
+
+- name: Obtain or Renew SSL certificates for all domains
+  shell: certbot --nginx -d {{ item }} --non-interactive --agree-tos -m your-email@example.com --redirect
+  loop: "{{ unique_domains }}"
+  args:
+    creates: "/etc/letsencrypt/live/{{ item }}/fullchain.pem"
+
+- name: Setup automatic renewal of SSL certificates
+  cron:
+    name: "Renew Let's Encrypt certificates"
+    special_time: daily
+    job: "certbot renew --nginx"
+    user: root

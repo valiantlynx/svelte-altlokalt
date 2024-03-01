@@ -1,0 +1,17 @@
+- name: Remove existing Docker container
+  command: docker rm -f {{ item.name }}
+  ignore_errors: yes
+  loop: "{{ docker_containers }}"
+
+- name: Remove existing Docker image
+  command: docker rmi {{ item.image }}
+  ignore_errors: yes
+  loop: "{{ docker_containers }}"
+
+- name: Pull new Docker image
+  command: docker pull {{ item.image }}
+  loop: "{{ docker_containers }}"
+
+- name: Run Docker container
+  command: docker run -d -p {{ item.port }}:{{ item.internal_port }} --name {{ item.name }} {{ item.image }}
+  loop: "{{ docker_containers }}"
