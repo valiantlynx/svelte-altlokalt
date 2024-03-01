@@ -50,12 +50,15 @@ provider "aws" {
 ```hcl
 terraform init
 ```
+
 ```hcl
 terraform validate
 ```
+
 ```hcl
 terraform plan
 ```
+
 ```hcl
 terraform apply --auto-approve
 ```
