@@ -20,9 +20,10 @@
     - name: Update Nginx configuration for HTTPS
       become: true
       template:
-        src: nginx_https.conf.j2
+        src: roles/nginx/templates/nginx_https.conf.j2
         dest: /etc/nginx/sites-available/default
       notify: restart nginx
+
 
   handlers:
     - name: restart nginx
