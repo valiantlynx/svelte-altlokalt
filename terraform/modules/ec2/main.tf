@@ -13,10 +13,6 @@ resource "aws_instance" "web" {
     Name = var.ec2_names[count.index]
   }
 
-  provisioner "local-exec" {
-    command = "touch ${abspath(path.module)}/../../../ansible/inventory/dynamic_inventory.ini"
-  }
-
   provisioner "remote-exec" {
     inline = [
       "echo 'SSH ready!'"
