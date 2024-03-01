@@ -1,14 +1,14 @@
 {% for container in docker_containers %}
 server {
     listen 80;
-    server_name {% for domain in container.domains %}{{ domain }} {% endfor %};
+    server_name {{ container.domains | join(' ') }};
     return 301 https://$host$request_uri;
 }
 
 {% if container.ssl_enabled %}
 server {
     listen 443 ssl http2;
-    server_name {% for domain in container.domains %}{{ domain }} {% endfor %};
+    server_name {{ container.domains | join(' ') }};
 
     ssl_certificate /etc/letsencrypt/live/{{ container.domains[0] }}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/{{ container.domains[0] }}/privkey.pem;

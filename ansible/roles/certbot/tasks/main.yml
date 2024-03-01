@@ -1,4 +1,5 @@
 - name: Install Certbot
+  become: true
   apt:
     name: python3-certbot-nginx
     state: present
@@ -10,7 +11,7 @@
     {% for domain in item.domains -%}
     -d {{ domain }} \
     {% endfor -%}
-    --non-interactive --agree-tos -m valiantlynxz@gmail.com --redirect
+    --expand --non-interactive --agree-tos -m valiantlynxz@gmail.com --redirect
   loop: "{{ docker_containers }}"
   when: item.ssl_enabled | default(false)
   args:
