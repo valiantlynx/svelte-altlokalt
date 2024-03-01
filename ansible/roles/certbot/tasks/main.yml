@@ -4,7 +4,7 @@
     state: present
 
 - name: Obtain or Renew SSL certificates for all domains
-  shell: certbot --nginx -d {{ item }} --non-interactive --agree-tos -m your-email@example.com --redirect
+  shell: certbot --nginx -d {{ item }} --non-interactive --agree-tos -m valiantlynxz@gmail.com --redirect
   loop: "{{ unique_domains }}"
   args:
     creates: "/etc/letsencrypt/live/{{ item }}/fullchain.pem"

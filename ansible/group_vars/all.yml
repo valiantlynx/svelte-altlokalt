@@ -11,9 +11,9 @@ docker_containers:
     port: 8081
     internal_port: 3000
     domains:
-      - valiantlynx.com
+      - astromanga.com
 
 unique_domains:
   - animevariant.com
   - nebulamanga.com
-  - valiantlynx.com
+  - astromanga.com
