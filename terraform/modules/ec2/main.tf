@@ -1,3 +1,4 @@
+
 resource "aws_instance" "web" {
   count = length(var.ec2_names)
   ami           = data.aws_ami.ubuntu.id
