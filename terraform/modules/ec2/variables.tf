@@ -11,7 +11,7 @@ variable "subnets" {
 variable "ec2_names" {
     description = "EC2 names"
     type = list(string)
-    default = ["altlokalt1", "altlokalt2"]
+    default = ["altlokalt1"] # e.g ["altlokalt1", "altlokalt2"]
 }
 
 variable "key_name" {

@@ -22,15 +22,15 @@ module "ec2" {
   private_key_path = module.pk.private_key_path
 }
 
-module "eip" {
-  source      = "./modules/eip"
-  instance_id = module.ec2.instances
-}
+# module "eip" {
+#   source      = "./modules/eip"
+#   instance_id = module.ec2.instances
+# }
 
-module "alb" {
-  source = "./modules/alb"
-  sg_id = module.sg.sg_id
-  subnets = module.vpc.subnet_ids
-  vpc_id = module.vpc.vpc_id
-  instances = module.ec2.instances
-}
+# module "alb" {
+#   source = "./modules/alb"
+#   sg_id = module.sg.sg_id
+#   subnets = module.vpc.subnet_ids
+#   vpc_id = module.vpc.vpc_id
+#   instances = module.ec2.instances
+# }
