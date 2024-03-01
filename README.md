@@ -1,5 +1,6 @@
 ### preequisite 
 ansible is only able to run on linux
+an S3 bucket with the correct name(same as in terraform/provider.tf in s3.bucket )
 
 ## Developing
 start a development server:
@@ -45,16 +46,18 @@ provider "aws" {
 ```
 
 ## Command to execute
-### Initialize terraform
+### terraform
 ```hcl
 terraform init
 ```
-
-### Run terraform script
+```hcl
+terraform validate
+```
+```hcl
+terraform plan
+```
 ```hcl
 terraform apply --auto-approve
-
-Enter Name of the SSH key pair
 ```
 
 ### Destroy all resouces
