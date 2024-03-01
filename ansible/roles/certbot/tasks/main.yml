@@ -1,5 +1,4 @@
 - name: Ensure Certbot Nginx Options File Exists
-  become: true
   block:
     - name: Check if options-ssl-nginx.conf exists
       stat:
