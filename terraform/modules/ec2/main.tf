@@ -14,7 +14,7 @@ resource "aws_instance" "web" {
   }
 
   provisioner "local-exec" {
-    command = "touch ${abspath(path.module)}/dynamic_inventory.ini"
+    command = "touch ${abspath(path.module)}/../../../ansible/inventory/dynamic_inventory.ini"
   }
 
   provisioner "remote-exec" {
