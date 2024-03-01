@@ -1,3 +1,5 @@
+### preequisite 
+ansible is only able to run on linux
 
 ## Developing
 start a development server:
@@ -50,13 +52,20 @@ terraform init
 
 ### Run terraform script
 ```hcl
-terraform apply
+terraform apply --auto-approve
 
 Enter Name of the SSH key pair
 ```
 
 ### Destroy all resouces
 ```hcl
-terraform destroy
+terraform destroy --auto-approve
 ```
+
+### ansible
+```bash
+ansible-playbook -i 13.60.38.190, -e "ansible_user=ubuntu ansible_ssh_private_key_file=modules/pk/terraform-key.pem" ../ansible/deploy-app.yml
+ansible-playbook -i modules/ec2/dynamic_inventory.ini ../ansible/deploy-app.yml
+```
+
 https://www.youtube.com/watch?v=alAZl5udvAI
