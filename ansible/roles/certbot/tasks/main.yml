@@ -1,25 +1,39 @@
-- name: Install Certbot
+- name: Ensure Certbot and Nginx are properly installed
   become: true
-  apt:
-    name: python3-certbot-nginx
-    state: present
+  block:
+    - name: Check if options-ssl-nginx.conf exists
+      stat:
+        path: /etc/letsencrypt/options-ssl-nginx.conf
+      register: options_ssl_nginx_conf
 
-- name: Install Certbot and request certificates for all domains
-  become: true
-  shell: |
-    certbot --nginx \
-    {% for domain in item.domains -%}
-    -d {{ domain }} \
-    {% endfor -%}
-    --expand --non-interactive --agree-tos -m valiantlynxz@gmail.com --redirect
-  loop: "{{ docker_containers }}"
-  when: item.ssl_enabled | default(false)
-  args:
-    creates: "/etc/letsencrypt/live/{{ item.domains[0] }}/fullchain.pem"
+    - name: Reinstall Certbot if necessary
+      apt:
+        name: python3-certbot-nginx
+        state: present
+        force: yes
+      when: not options_ssl_nginx_conf.stat.exists
 
-- name: Setup automatic renewal of SSL certificates
-  cron:
-    name: "Renew Let's Encrypt certificates"
-    special_time: daily
-    job: "certbot renew --nginx"
-    user: root
+    - name: Install Certbot
+      apt:
+        name: python3-certbot-nginx
+        state: present
+
+    - name: Install Certbot and request certificates for all domains
+      shell: |
+        certbot --nginx \
+        {% for domain in item.domains -%}
+        -d {{ domain }} \
+        {% endfor -%}
+        --expand --non-interactive --agree-tos -m valiantlynxz@gmail.com --redirect
+      loop: "{{ docker_containers }}"
+      when: item.ssl_enabled | default(false)
+      args:
+        creates: "/etc/letsencrypt/live/{{ item.domains[0] }}/fullchain.pem"
+
+    - name: Setup automatic renewal of SSL certificates
+      cron:
+        name: "Renew Let's Encrypt certificates"
+        special_time: daily
+        job: "certbot renew --nginx"
+        user: root
+
