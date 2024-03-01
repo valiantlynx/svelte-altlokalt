@@ -9,18 +9,15 @@
 
 - name: Request Certificates with Certbot for unique domains
   become: true
-  shell: certbot --nginx -d {{ unique_domains_list | join(' -d ') }} --expand --non-interactive --agree-tos -m valiantlynxz@gmail.com --redirect
+  command: certbot certonly --nginx -d {{ unique_domains_list | join(' -d ') }} --expand --non-interactive --agree-tos -m valiantlynxz@gmail.com --keep
   ignore_errors: yes
   register: certbot_command
   changed_when: "'Congratulations' in certbot_command.stdout"
 
-- name: Reload Nginx if certificates were successfully obtained
-  become: true
-  service:
-    name: nginx
-    state: reloaded
-  when: certbot_command is changed
-
+- name: Log Certbot output
+  debug:
+    var: certbot_command.stdout_lines
+  when: certbot_command is failed
 
 - name: Setup automatic renewal of SSL certificates
   cron:

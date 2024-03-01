@@ -3,8 +3,9 @@
     name: nginx
     state: present
 
-- name: Setup Nginx configuration
+# Initially, only configure Nginx for HTTP to allow Certbot to validate domain ownership
+- name: Setup Nginx configuration for HTTP only
   template:
-    src: nginx.conf.j2
+    src: nginx_http.conf.j2
     dest: /etc/nginx/sites-available/default
   notify: restart nginx

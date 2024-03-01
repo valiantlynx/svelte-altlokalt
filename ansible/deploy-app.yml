@@ -2,10 +2,31 @@
 - hosts: ec2_instances
   become: true
   vars_files:
-    - group_vars/all.yml  # Assuming you're using a global vars file for Docker containers and domains.
+    - group_vars/all.yml
+
   roles:
-    - common       # Basic setup, e.g., updating package cache
-    - docker       # Installing Docker and Docker Compose
-    - docker_deploy  # Deploying your Docker containers as per the configurations
-    - nginx        # Setting up Nginx to serve your applications and reverse proxy to Docker containers
-    - certbot      # Handling SSL certificates for your domains
+    - common
+    - docker
+    - docker_deploy
+    - nginx  # This initial run should only configure Nginx for HTTP.
+
+  tasks:
+    # This task assumes the certbot role has already been adjusted to obtain SSL certificates
+    # but does not automatically update Nginx configurations for HTTPS.
+    - name: Request SSL certificates (handled inside certbot role)
+      include_role:
+        name: certbot
+
+    - name: Update Nginx configuration for HTTPS
+      become: true
+      template:
+        src: nginx_https.conf.j2
+        dest: /etc/nginx/sites-available/default
+      notify: restart nginx
+
+  handlers:
+    - name: restart nginx
+      become: true
+      service:
+        name: nginx
+        state: restarted
