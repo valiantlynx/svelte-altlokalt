@@ -1,14 +1,14 @@
 ---
 - name: Copy Docker Compose file to the Ubuntu user's home
   ansible.builtin.copy:
-    dest: "{{ ansible_env.HOME }}/"
-    src: "docker"
+    dest: "{{ ansible_env.HOME }}/docker-compose.yml"
+    src: "docker/docker-compose.yml"
     mode: "0644"
     force: true
 
 - name: copy Nginx configuration files to the EC2 instance
   ansible.builtin.copy:
-    dest: "{{ ansible_env.HOME }}/nginx/"
+    dest: "{{ ansible_env.HOME }}/"
     src: "nginx"
     mode: "0644"
     directory_mode: 0755
