@@ -1,8 +1,3 @@
-- name: Install Nginx
-  apt:
-    name: nginx
-    state: present
-
 - name: Setup Nginx configuration
   template:
     src: nginx.conf.j2

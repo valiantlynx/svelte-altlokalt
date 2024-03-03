@@ -1,18 +1,31 @@
 ---
-- name: Remove existing Docker container
-  command: docker rm -f {{ item.name }}
-  ignore_errors: yes
-  loop: "{{ docker_containers }}"
+- name: Create deployment directory on EC2
+  become: true
+  file:
+    path: "{{ ansible_user_dir }}/deployment"
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: '0755'
 
-- name: Remove existing Docker image
-  command: docker rmi {{ item.image }}
-  ignore_errors: yes
-  loop: "{{ docker_containers }}"
+- name: Copy Docker Compose file to the EC2 instance
+  become: true
+  copy:
+    src: "{{ playbook_dir }}/docker-compose.yml"
+    dest: "{{ ansible_user_dir }}/deployment/docker-compose.yml"
+    owner: ubuntu
+    group: ubuntu
+    mode: '0644'
 
-- name: Pull new Docker image
-  command: docker pull {{ item.image }}
-  loop: "{{ docker_containers }}"
+- name: Pull the latest images with Docker Compose
+  become: true
+  command: docker-compose pull
+  args:
+    chdir: "{{ ansible_user_dir }}/deployment"
 
-- name: Run Docker container
-  command: docker run -d -p {{ item.port }}:{{ item.internal_port }} --name {{ item.name }} {{ item.image }}
-  loop: "{{ docker_containers }}"
+- name: Deploy services using Docker Compose
+  become: true
+  command: docker-compose up -d
+  args:
+    chdir: "{{ ansible_user_dir }}/deployment"
+
