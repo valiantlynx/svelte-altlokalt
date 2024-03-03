@@ -1,31 +1,32 @@
 ---
-- name: Create deployment directory on EC2
-  become: true
-  file:
-    path: "{{ ansible_user_dir }}/deployment"
-    state: directory
-    owner: ubuntu
-    group: ubuntu
-    mode: '0755'
-
 - name: Copy Docker Compose file to the EC2 instance
   become: true
-  copy:
-    src: "{{ playbook_dir }}/docker-compose.yml"
-    dest: "{{ ansible_user_dir }}/deployment/docker-compose.yml"
-    owner: ubuntu
-    group: ubuntu
-    mode: '0644'
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/"
+    src: "docker"
+    mode: "0644"
+    directory_mode: 0755
+    force: true
+
+- name: copy Nginx configuration files to the EC2 instance
+  become: true
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/nginx/"
+    src: "nginx"
+    mode: "0644"
+    directory_mode: 0755
+    force: true
+  ignore_errors: true
 
 - name: Pull the latest images with Docker Compose
   become: true
   command: docker-compose pull
   args:
-    chdir: "{{ ansible_user_dir }}/deployment"
+    chdir: "{{ ansible_user_dir }}/"
 
 - name: Deploy services using Docker Compose
   become: true
   command: docker-compose up -d
   args:
-    chdir: "{{ ansible_user_dir }}/deployment"
+    chdir: "{{ ansible_user_dir }}/"
 

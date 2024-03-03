@@ -1,5 +1,0 @@
-- name: Setup Nginx configuration
-  template:
-    src: nginx.conf.j2
-    dest: /etc/nginx/sites-available/default
-  notify: restart nginx

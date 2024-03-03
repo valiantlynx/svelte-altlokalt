@@ -2,6 +2,6 @@
 - hosts: ec2_instances
   become: true
   roles:
-    - common       # Basic setup, e.g., updating package cache
-    - docker       # Installing Docker and Docker Compose
-    - docker_deploy  # Deploying your Docker containers as per the configurations
+    - common
+    - docker
+    - docker_deploy
