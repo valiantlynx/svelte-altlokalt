@@ -2,11 +2,11 @@
 - name: Copy Docker Compose file to the EC2 instance
   become: true
   ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/"
-    src: "docker"
+    dest: "{{ ansible_user_dir }}/docker-compose.yml"
+    src: "docker/docker-compose.yml"
     mode: "0644"
-    directory_mode: 0755
     force: true
+
 
 - name: copy Nginx configuration files to the EC2 instance
   become: true
@@ -21,14 +21,10 @@
 - name: Pull the latest images with Docker Compose
   become: true
   command: docker-compose pull
-  args:
-    chdir: "{{ ansible_user_dir }}/"
 
 - name: Deploy services using Docker Compose
   become: true
   command: docker-compose up -d
-  args:
-    chdir: "{{ ansible_user_dir }}/"
 
 - name: Schedule automated certificate renewal
   become: true
