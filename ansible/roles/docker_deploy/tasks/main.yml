@@ -35,5 +35,4 @@
     hour: "5"
     minute: "0"
     job: "docker-compose -f /home/ubuntu/docker-compose.yml up certbot"
-    user: ubuntu # Ensure this is set to run as the 'ubuntu' user
-    become: true # Use only if necessary to set the cron job for the 'ubuntu' user
+    user: ubuntu # This specifies the user under which the cron job will run
