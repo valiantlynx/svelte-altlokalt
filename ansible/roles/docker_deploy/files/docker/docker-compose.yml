@@ -42,7 +42,7 @@ services:
     depends_on:
       - nginx
     restart: always
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email valiantlynxz@gmail.com --agree-tos --no-eff-email --staging -d animevariant.com -d nebulamanga.com -d astromanga.com -d www.animevariant.com -d www.nebulamanga.com -d www.astromanga.com
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email valiantlynxz@gmail.com --agree-tos --no-eff-email --staging -d animevariant.com -d nebulamanga.com -d astromanga.com
 
 networks:
   webnet:
