@@ -1,6 +1,5 @@
 ---
 - name: Copy Docker Compose file to the EC2 instance
-  become: true
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/docker-compose.yml"
     src: "docker/docker-compose.yml"
@@ -9,7 +8,6 @@
 
 
 - name: copy Nginx configuration files to the EC2 instance
-  become: true
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/nginx/"
     src: "nginx"
@@ -27,7 +25,6 @@
   command: docker-compose up -d
 
 - name: Schedule automated certificate renewal
-  become: true
   ansible.builtin.cron:
     name: "Renew Let's Encrypt certificates"
     day: "1"
