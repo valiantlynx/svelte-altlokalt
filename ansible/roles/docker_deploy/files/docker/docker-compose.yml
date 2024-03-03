@@ -4,25 +4,24 @@ version: '3.8'
 services:
   manga-app:
     image: valiantlynx/svelte-manga:latest
+    container_name: manga-app
     ports:
-      - "8080:3000"
+      - 8080:3000
     restart: always
-    networks:
-      - webnet
 
   blog-app:
     image: valiantlynx/svelte-altlokalt:latest
+    container_name: blog-app
     ports:
-      - "8081:3000"
+      - 8081:3000
     restart: always
-    networks:
-      - webnet
 
   nginx:
     image: nginx:latest
+    container_name: nginx
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./certbot/conf:/etc/letsencrypt
@@ -30,19 +29,12 @@ services:
     depends_on:
       - manga-app
       - blog-app
-    restart: always
-    networks:
-      - webnet
+    restart: unless-stopped
 
   certbot:
     image: certbot/certbot
+    container_name: certbot
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-    depends_on:
-      - nginx
-    restart: always
     command: certonly --webroot -w /var/www/certbot --force-renewal --email valiantlynxz@gmail.com -d animevariant.com -d nebulamanga.com -d astromanga.com --agree-tos
-
-networks:
-  webnet:
