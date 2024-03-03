@@ -1,6 +1,5 @@
 ---
 - hosts: ec2_instances
-  become: true
   roles:
     - common
     - docker
