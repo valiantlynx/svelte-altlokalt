@@ -8,7 +8,7 @@ docker_containers:
       - nebulamanga.com
       - www.animevariant.com
       - www.nebulamanga.com
-    ssl_enabled: true
+    ssl_enabled: false
   - name: blog-app
     image: valiantlynx/svelte-altlokalt:latest
     port: 8081
@@ -16,7 +16,7 @@ docker_containers:
     domains:
       - astromanga.com
       - www.astromanga.com
-    ssl_enabled: true
+    ssl_enabled: false
 
 unique_domains:
   - animevariant.com
