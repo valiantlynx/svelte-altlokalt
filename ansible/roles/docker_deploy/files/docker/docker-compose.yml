@@ -25,6 +25,8 @@ services:
       - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     depends_on:
       - manga-app
       - blog-app
@@ -35,12 +37,12 @@ services:
   certbot:
     image: certbot/certbot
     volumes:
-      - ./certs:/etc/letsencrypt
-      - ./certbot-data:/data/letsencrypt
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     depends_on:
       - nginx
     restart: always
-    command: certonly --webroot --webroot-path=/data/letsencrypt --email valiantlynxz@gmail.com --agree-tos --no-eff-email --staging -d animevariant.com -d nebulamanga.com -d astromanga.com -d www.animevariant.com -d www.nebulamanga.com -d www.astromanga.com
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email valiantlynxz@gmail.com --agree-tos --no-eff-email --staging -d animevariant.com -d nebulamanga.com -d astromanga.com -d www.animevariant.com -d www.nebulamanga.com -d www.astromanga.com
 
 networks:
   webnet:
