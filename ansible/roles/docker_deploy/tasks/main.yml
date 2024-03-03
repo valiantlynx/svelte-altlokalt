@@ -1,28 +1,31 @@
 ---
-- name: Copy Docker Compose file to the EC2 instance
+- name: Copy Docker Compose file to the Ubuntu user's home
   ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/docker-compose.yml"
-    src: "docker/docker-compose.yml"
+    dest: "{{ ansible_env.HOME }}/"
+    src: "docker"
     mode: "0644"
     force: true
 
-
 - name: copy Nginx configuration files to the EC2 instance
   ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/nginx/"
+    dest: "{{ ansible_env.HOME }}/nginx/"
     src: "nginx"
     mode: "0644"
     directory_mode: 0755
     force: true
-  ignore_errors: true
 
 - name: Pull the latest images with Docker Compose
-  become: true
   command: docker-compose pull
+  become: true # Escalate if necessary for Docker commands
+  args:
+    chdir: "{{ ansible_env.HOME }}/" # Ensure this points to where docker-compose.yml is located
 
 - name: Deploy services using Docker Compose
-  become: true
   command: docker-compose up -d
+  become: true # Escalate if necessary for Docker commands
+  args:
+    chdir: "{{ ansible_env.HOME }}/" # Ensure this points to where docker-compose.yml is located
+
 
 - name: Schedule automated certificate renewal
   ansible.builtin.cron:
@@ -31,5 +34,6 @@
     month: "*/2"
     hour: "5"
     minute: "0"
-    job: "/usr/bin/docker compose -f {{ ansible_user_dir }}/docker-compose.yml up certbot"
-    user: root
+    job: "docker-compose -f /home/ubuntu/docker-compose.yml up certbot"
+    user: ubuntu # Ensure this is set to run as the 'ubuntu' user
+    become: true # Use only if necessary to set the cron job for the 'ubuntu' user
