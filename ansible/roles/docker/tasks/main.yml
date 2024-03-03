@@ -1,4 +1,5 @@
 - name: Install Docker dependencies
+  become: true
   apt:
     name:
       - docker.io
