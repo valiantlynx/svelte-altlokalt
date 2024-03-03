@@ -30,3 +30,13 @@
   args:
     chdir: "{{ ansible_user_dir }}/"
 
+- name: Schedule automated certificate renewal
+  become: true
+  ansible.builtin.cron:
+    name: "Renew Let's Encrypt certificates"
+    day: "1"
+    month: "*/2"
+    hour: "5"
+    minute: "0"
+    job: "/usr/bin/docker compose -f {{ ansible_user_dir }}/docker-compose.yml up certbot"
+    user: root
