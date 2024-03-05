@@ -2,6 +2,7 @@
 version: '3.8'
 
 volumes:
+  portainer_data:
   prometheus-data:
     driver: local
   grafana-data:
@@ -63,6 +64,8 @@ services:
       -d kunstivestfold.no -d www.kunstivestfold.no
       -d minlokale.com -d www.minlokale.com
       -d monitor.altlokalt.com
+      -d kuma.altlokalt.com
+      -d portainer.altlokalt.com
       --agree-tos --non-interactive
 
   prometheus:
@@ -114,6 +117,21 @@ services:
     networks:
       - monitoring
 
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    volumes:
+      - ./uptime-kuma:/app/data
+    restart: always
+    networks:
+      - monitoring
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
 
 networks:
   monitoring: {}
