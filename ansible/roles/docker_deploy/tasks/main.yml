@@ -45,8 +45,8 @@
     mode: "0644"
     force: true
 
-- name: Restart services to apply HTTPS configuration
-  command: docker-compose up -d
+- name: Reload NGINX configuration
+  command: docker-compose exec nginx nginx -s reload
   become: true
   args:
     chdir: "{{ ansible_env.HOME }}/"
