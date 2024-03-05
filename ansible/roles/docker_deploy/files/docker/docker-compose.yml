@@ -35,5 +35,5 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/logs:/var/log/letsencrypt
       - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email valiantlynxz@gmail.com -d ghostscans.com -d ethermanga.com -d knightscans.com --agree-tos --non-interactive
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email valiantlynxz@gmail.com -d ghostscans.com -d ethermanga.com -d knightscans.com -d www.ghostscans.com -d www.ethermanga.com -d www.knightscans.com --agree-tos --non-interactive
 
