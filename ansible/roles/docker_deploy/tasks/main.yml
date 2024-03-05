@@ -45,11 +45,18 @@
     mode: "0644"
     force: true
 
-- name: Reload NGINX configuration
-  command: docker-compose exec nginx nginx -s reload
+- name: Stop existing Docker Compose services
+  command: docker-compose down
   become: true
   args:
     chdir: "{{ ansible_env.HOME }}/"
+
+- name: Deploy services using Docker Compose
+  command: docker-compose up -d
+  become: true
+  args:
+    chdir: "{{ ansible_env.HOME }}/"
+
 
 # - name: Schedule automated certificate renewal
 #   ansible.builtin.cron:
