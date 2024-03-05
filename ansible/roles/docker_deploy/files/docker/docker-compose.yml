@@ -50,10 +50,6 @@ services:
       -d kunstivestfold.no -d www.kunstivestfold.no
       -d minlokale.com -d www.minlokale.com
       -d minlokale.no -d www.minlokale.no
-      -d smartinnovativeproduct.com -d www.smartinnovativeproduct.com
-      -d smartinnovativeproduct.no -d www.smartinnovativeproduct.no
-      -d smartinnovativeproducts.com -d www.smartinnovativeproducts.com
-      -d smartinnovativeproducts.no -d www.smartinnovativeproducts.no
       -d vestfoldkunst.com -d www.vestfoldkunst.com
       --agree-tos --non-interactive
 
