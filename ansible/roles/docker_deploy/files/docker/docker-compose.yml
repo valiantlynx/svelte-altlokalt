@@ -28,6 +28,8 @@ services:
       - svelte-altlokalt
       - grafana
     restart: unless-stopped
+    networks:
+    - monitoring
 
   certbot:
     image: certbot/certbot
@@ -94,7 +96,7 @@ services:
       - '/:/host:ro,rslave'
 
   cadvisor:
-    image: google/cadvisor:latest
+    image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
     volumes:
       - /:/rootfs:ro
