@@ -49,7 +49,6 @@ services:
       -d godtilbud.no -d www.godtilbud.no
       -d kunstivestfold.no -d www.kunstivestfold.no
       -d minlokale.com -d www.minlokale.com
-      -d minlokale.no -d www.minlokale.no
       -d vestfoldkunst.com -d www.vestfoldkunst.com
       --agree-tos --non-interactive
 
