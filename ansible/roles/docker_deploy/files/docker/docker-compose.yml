@@ -2,14 +2,9 @@
 version: '3.8'
 
 services:
-  manga-app:
-    image: valiantlynx/svelte-manga:latest
-    container_name: manga-app
-    restart: always
-
-  blog-app:
+  svelte-altlokalt:
     image: valiantlynx/svelte-altlokalt:latest
-    container_name: blog-app
+    container_name: svelte-altlokalt
     restart: always
 
   nginx:
@@ -24,8 +19,7 @@ services:
       - ./certbot/logs:/var/log/letsencrypt
       - ./certbot/www:/var/www/certbot
     depends_on:
-      - manga-app
-      - blog-app
+      - svelte-altlokalt
     restart: unless-stopped
 
   certbot:
@@ -35,5 +29,33 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/logs:/var/log/letsencrypt
       - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email valiantlynxz@gmail.com -d ghostscans.com -d ethermanga.com -d knightscans.com -d www.ghostscans.com -d www.ethermanga.com -d www.knightscans.com --agree-tos --non-interactive
+    command: >
+      certonly --webroot -w /var/www/certbot --force-renewal --email valiantlynxz@gmail.com
+      -d altlokal.no -d www.altlokal.no
+      -d altlokalt.com -d www.altlokalt.com
+      -d digilokal.no -d www.digilokal.no
+      -d digilokale.com -d www.digilokale.com
+      -d digilokale.no -d www.digilokale.no
+      -d dinlokal.no -d www.dinlokal.no
+      -d minlokal.no -d www.minlokal.no
+      -d blioppdage.com -d www.blioppdage.com
+      -d blioppdage.no -d www.blioppdage.no
+      -d blioppdaget.com -d www.blioppdaget.com
+      -d bovimobilitet.no -d www.bovimobilitet.no
+      -d bovimobility.com -d www.bovimobility.com
+      -d bovimobility.no -d www.bovimobility.no
+      -d digicv.no -d www.digicv.no
+      -d digisoknad.no -d www.digisoknad.no
+      -d godtilbud.no -d www.godtilbud.no
+      -d kunstivestfold.no -d www.kunstivestfold.no
+      -d minlokale.com -d www.minlokale.com
+      -d minlokale.no -d www.minlokale.no
+      -d smartinnovativeproduct.com -d www.smartinnovativeproduct.com
+      -d smartinnovativeproduct.no -d www.smartinnovativeproduct.no
+      -d smartinnovativeproducts.com -d www.smartinnovativeproducts.com
+      -d smartinnovativeproducts.no -d www.smartinnovativeproducts.no
+      -d vestfoldkunst.com -d www.vestfoldkunst.com
+      --agree-tos --non-interactive
+
+
 
