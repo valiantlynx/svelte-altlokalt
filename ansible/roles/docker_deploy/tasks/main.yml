@@ -58,12 +58,12 @@
     chdir: "{{ ansible_env.HOME }}/"
 
 
-# - name: Schedule automated certificate renewal
-#   ansible.builtin.cron:
-#     name: "Renew Let's Encrypt certificates"
-#     day: "1"
-#     month: "*/2"
-#     hour: "5"
-#     minute: "0"
-#     job: "cd {{ ansible_env.HOME }} && docker-compose run --rm certbot renew && docker-compose exec nginx nginx -s reload"
-#     user: ubuntu
+- name: Schedule automated certificate renewal
+  ansible.builtin.cron:
+    name: "Renew Let's Encrypt certificates"
+    day: "1"
+    month: "*/2"
+    hour: "5"
+    minute: "0"
+    job: "cd {{ ansible_env.HOME }} && docker-compose run --rm certbot renew && docker-compose exec nginx nginx -s reload"
+    user: ubuntu
