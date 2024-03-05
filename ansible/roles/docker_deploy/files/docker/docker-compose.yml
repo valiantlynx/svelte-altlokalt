@@ -35,5 +35,5 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/logs:/var/log/letsencrypt
       - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email valiantlynxz@gmail.com -d animevariant.com -d nebulamanga.com -d astromanga.com --agree-tos --non-interactive
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email valiantlynxz@gmail.com -d auramanga.com -d comicbreeze.com -d comicharbor.com --agree-tos --non-interactive
 
