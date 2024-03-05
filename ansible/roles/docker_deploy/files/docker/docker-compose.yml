@@ -56,7 +56,7 @@ services:
       -d kunstivestfold.no -d www.kunstivestfold.no
       -d minlokale.com -d www.minlokale.com
       -d vestfoldkunst.com -d www.vestfoldkunst.com
-      -d altlokalt.valiantlynx.com
+      -d monitor.altlokalt.com
       --agree-tos --non-interactive
 
   prometheus:
