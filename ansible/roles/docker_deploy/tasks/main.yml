@@ -6,12 +6,18 @@
     mode: "0644"
     force: true
 
-- name: copy Nginx configuration files to the EC2 instance
+- name: Copy initial NGINX HTTP configuration to the EC2 instance
   ansible.builtin.copy:
     dest: "{{ ansible_env.HOME }}/"
     src: "nginx"
     mode: "0644"
-    directory_mode: 0755
+    force: true
+
+- name: Copy initial NGINX HTTP configuration to the EC2 instance
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/nginx/nginx.conf"
+    src: "nginx/http.conf"
+    mode: "0644"
     force: true
 
 - name: Pull the latest images with Docker Compose
@@ -21,18 +27,36 @@
     chdir: "{{ ansible_env.HOME }}/" # Ensure this points to where docker-compose.yml is located
 
 - name: Deploy services using Docker Compose
-  command: docker-compose up -d
+  command: docker-compose up -d nginx
   become: true # Escalate if necessary for Docker commands
   args:
     chdir: "{{ ansible_env.HOME }}/" # Ensure this points to where docker-compose.yml is located
 
+- name: Obtain SSL certificates with Certbot
+  command: docker-compose run --rm certbot
+  become: true
+  args:
+    chdir: "{{ ansible_env.HOME }}/"
 
-- name: Schedule automated certificate renewal
-  ansible.builtin.cron:
-    name: "Renew Let's Encrypt certificates"
-    day: "1"
-    month: "*/2"
-    hour: "5"
-    minute: "0"
-    job: "docker-compose -f /home/ubuntu/docker-compose.yml up certbot"
-    user: ubuntu # This specifies the user under which the cron job will run
+- name: Copy NGINX HTTPS configuration to the EC2 instance (switch to HTTPS)
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/nginx/nginx.conf"
+    src: "nginx/https.conf"
+    mode: "0644"
+    force: true
+
+- name: Restart services to apply HTTPS configuration
+  command: docker-compose up -d
+  become: true
+  args:
+    chdir: "{{ ansible_env.HOME }}/"
+
+# - name: Schedule automated certificate renewal
+#   ansible.builtin.cron:
+#     name: "Renew Let's Encrypt certificates"
+#     day: "1"
+#     month: "*/2"
+#     hour: "5"
+#     minute: "0"
+#     job: "cd {{ ansible_env.HOME }} && docker-compose run --rm certbot renew && docker-compose exec nginx nginx -s reload"
+#     user: ubuntu
