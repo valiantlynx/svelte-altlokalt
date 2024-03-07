@@ -64,6 +64,11 @@
   args:
     chdir: "{{ ansible_env.HOME }}/"
 
+- name: Delete all hanging stuff
+  command: docker system prune -a -f --volumes
+  become: true
+  args:
+    chdir: "{{ ansible_env.HOME }}/"
 
 - name: Schedule automated certificate renewal
   ansible.builtin.cron:

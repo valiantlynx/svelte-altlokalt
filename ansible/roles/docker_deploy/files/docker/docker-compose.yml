@@ -2,7 +2,7 @@
 version: '3.8'
 
 volumes:
-  portainer_data:
+  # portainer_data:
   prometheus-data:
     driver: local
   grafana-data:
@@ -126,14 +126,14 @@ services:
     networks:
       - monitoring
 
-  portainer:
-    image: portainer/portainer-ce:latest
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-    networks:
-      - monitoring
+  # portainer:
+  #   image: portainer/portainer-ce:latest
+  #   restart: always
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - portainer_data:/data
+  #   networks:
+  #     - monitoring
       
 networks:
   monitoring: {}
