@@ -65,7 +65,7 @@
     chdir: "{{ ansible_env.HOME }}/"
 
 - name: Delete all hanging stuff
-  command: docker system prune -a -f --volumes
+  command: docker system prune -a -f
   become: true
   args:
     chdir: "{{ ansible_env.HOME }}/"
