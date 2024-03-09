@@ -1,13 +1,6 @@
 ---
 version: '3.8'
 
-volumes:
-  # portainer_data:
-  prometheus-data:
-    driver: local
-  grafana-data:
-    driver: local
-
 services:
   svelte-altlokalt:
     image: valiantlynx/svelte-altlokalt:latest
@@ -66,27 +59,6 @@ services:
       -d monitor.altlokalt.com
       --agree-tos --non-interactive
 
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
-    volumes:
-      - /etc/prometheus:/config
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus-data:/prometheus
-    command: "--config.file=/etc/prometheus/prometheus.yml"
-    restart: unless-stopped
-    networks:
-      - monitoring
-
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    volumes:
-      - grafana-data:/var/lib/grafana
-    restart: unless-stopped
-    networks:
-      - monitoring
-
   node-exporter:
     image: quay.io/prometheus/node-exporter:latest
     container_name: node_exporter
@@ -118,24 +90,6 @@ services:
       - /dev/kmsg
     networks:
       - monitoring
-
-  uptime-kuma:
-    image: louislam/uptime-kuma:1
-    container_name: uptime-kuma
-    volumes:
-      - ./uptime-kuma:/app/data
-    restart: always
-    networks:
-      - monitoring
-
-  # portainer:
-  #   image: portainer/portainer-ce:latest
-  #   restart: always
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #     - portainer_data:/data
-  #   networks:
-  #     - monitoring
-      
+  
 networks:
   monitoring: {}
