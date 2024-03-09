@@ -63,6 +63,7 @@ services:
       -d godtilbud.no -d www.godtilbud.no
       -d kunstivestfold.no -d www.kunstivestfold.no
       -d minlokale.com -d www.minlokale.com
+      -d monitor.altlokalt.com
       --agree-tos --non-interactive
 
   prometheus:
