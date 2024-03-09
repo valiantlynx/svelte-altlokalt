@@ -89,6 +89,8 @@ services:
   node-exporter:
     image: quay.io/prometheus/node-exporter:latest
     container_name: node_exporter
+    ports:
+      - 9100:9100
     command: 
       - '--path.rootfs=/host'
     pid: host
@@ -101,6 +103,8 @@ services:
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
+    ports:
+      - 8080:8080
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
